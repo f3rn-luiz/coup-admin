@@ -8,13 +8,13 @@ import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
 
 @Component({
-	selector: 'app-conf',
-	templateUrl: 'conf.page.html',
+	selector: 'app-config',
+	templateUrl: 'config.page.html',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [IonIcon, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, ReactiveFormsModule],
 })
-export class ConfPage implements OnInit {
+export class ConfigPage implements OnInit {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
 	configuracao1Form!: UntypedFormGroup;
