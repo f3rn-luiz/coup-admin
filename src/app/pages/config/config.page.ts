@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
@@ -14,7 +14,7 @@ import { Jogador } from 'src/app/core/game.type';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [IonIcon, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, ReactiveFormsModule],
 })
-export class ConfigPage implements OnInit {
+export class ConfigPage implements OnInit, OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
 	configuracao1Form!: UntypedFormGroup;
@@ -55,6 +55,11 @@ export class ConfigPage implements OnInit {
 		});
 	}
 
+	ngOnDestroy(): void {
+		this._unsubscribeAll.next(null);
+		this._unsubscribeAll.complete();
+	}
+
 	aumentarValor(campo: string) {
 		this.configuracao1Form.get(campo)?.setValue(this.configuracao1Form.get(campo)?.value + 1);
 	}
@@ -70,7 +75,7 @@ export class ConfigPage implements OnInit {
 	configurarJogadores() {
 		let jogadores: Jogador[] = [];
 		for (let i = 0; i < this.configuracao1Form.get('numero_jogadores')?.value; i++) {
-			jogadores = [...jogadores, { posicao: i, nome: this.configuracao2Form.get(`nome_j${i}`)?.value.trim(), vida: this.configuracao1Form.get('numero_vidas')?.value, dinheiro: this.configuracao1Form.get('dinheiro_inicial')?.value }];
+			jogadores = [...jogadores, { nome: this.configuracao2Form.get(`nome_j${i}`)?.value.trim(), vida: this.configuracao1Form.get('numero_vidas')?.value, dinheiro: this.configuracao1Form.get('dinheiro_inicial')?.value }];
 		}
 		this._gameService._jogadores.next(jogadores);
 		this._changeDetectorsRef.markForCheck();

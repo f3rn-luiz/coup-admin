@@ -13,7 +13,10 @@ export class GameService {
 
 	// FASE 2 - Jogadores e Posições
 	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>(null);
+
+	// EM JOGO
 	_rodada: BehaviorSubject<number> = new BehaviorSubject(0);
+	_historico_geral: BehaviorSubject<string[] | null> = new BehaviorSubject<string[] | null>(null);
 
 	constructor() {}
 }
