@@ -1,18 +1,59 @@
-<ion-header [translucent]="true">
-	<ion-toolbar>
-		<ion-title> Blank </ion-title>
-	</ion-toolbar>
-</ion-header>
+<ion-content>
+	<div class="relative flex flex-col justify-center items-center h-full w-full">
+		<div class="absolute top-5 w-full text-center text-3xl font-extralight">Configuração inicial</div>
 
-<ion-content [fullscreen]="true">
-	<ion-header collapse="condense">
-		<ion-toolbar>
-			<ion-title size="large">Blank</ion-title>
-		</ion-toolbar>
-	</ion-header>
+		<div class="flex flex-col justify-center items-center h-full w-full">
+			<form [formGroup]="configuracaoForm">
+				<div class="w-full">
+					<p class="w-full text-center text-xl mb-2">Nº de Jogadores</p>
+					<div class="flex w-52 mx-auto">
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="diminuirValor('numero_jogadores')"><ion-icon class="h-5 w-5" name="remove"></ion-icon></div>
+						<input class="bg-white text-black text-center h-10 mx-auto w-20 text-xl rounded-md" formControlName="numero_jogadores" type="number" min="2" max="10" readonly />
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="aumentarValor('numero_jogadores')"><ion-icon class="h-5 w-5" name="add"></ion-icon></div>
+					</div>
+				</div>
 
-	<div id="container" class="text-green-500">
-		<strong>Ready to create an app HEHE?</strong>
-		<p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+				<div class="w-full mt-7">
+					<p class="w-full text-center text-xl mb-2">Nº de Vidas</p>
+					<div class="flex w-52 mx-auto">
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="diminuirValor('numero_vidas')"><ion-icon class="h-5 w-5" name="remove"></ion-icon></div>
+						<input class="bg-white text-black text-center h-10 mx-auto w-20 text-xl rounded-md" formControlName="numero_vidas" type="number" min="1" readonly />
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="aumentarValor('numero_vidas')"><ion-icon class="h-5 w-5" name="add"></ion-icon></div>
+					</div>
+				</div>
+
+				<div class="w-full mt-7">
+					<p class="w-full text-center text-xl mb-2">Dinheiro Inicial</p>
+					<div class="flex w-52 mx-auto">
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="diminuirValor('dinheiro_inicial')"><ion-icon class="h-5 w-5" name="remove"></ion-icon></div>
+						<input class="bg-white text-black text-center h-10 mx-auto w-20 text-xl rounded-md" formControlName="dinheiro_inicial" type="number" min="0" readonly />
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="aumentarValor('dinheiro_inicial')"><ion-icon class="h-5 w-5" name="add"></ion-icon></div>
+					</div>
+				</div>
+
+				<div class="w-4/5 mx-auto border-b border-gray-600 my-10"></div>
+				<div class="w-full">
+					<p class="w-full text-center text-xl mb-2">Custo Golpe de Estado</p>
+					<div class="flex w-52 mx-auto">
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="diminuirValor('custo_golpe_estado')"><ion-icon class="h-5 w-5" name="remove"></ion-icon></div>
+						<input class="bg-white text-black text-center h-10 mx-auto w-20 text-xl rounded-md" formControlName="custo_golpe_estado" type="number" min="0" readonly />
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="aumentarValor('custo_golpe_estado')"><ion-icon class="h-5 w-5" name="add"></ion-icon></div>
+					</div>
+				</div>
+
+				<div class="w-full mt-7">
+					<p class="w-full text-center text-xl mb-2">Golpe de Estado Obrigatório</p>
+					<div class="flex w-52 mx-auto">
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="diminuirValor('golpe_estado_obrigatorio')"><ion-icon class="h-5 w-5" name="remove"></ion-icon></div>
+						<input class="bg-white text-black text-center h-10 mx-auto w-20 text-xl rounded-md" formControlName="golpe_estado_obrigatorio" type="number" min="0" readonly />
+						<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="aumentarValor('golpe_estado_obrigatorio')"><ion-icon class="h-5 w-5" name="add"></ion-icon></div>
+					</div>
+				</div>
+			</form>
+
+			<div class="flex justify-center items-center mx-auto mt-14 border border-white rounded-full py-2 px-7 text-xl" (click)="true">Fase 2 <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon></div>
+		</div>
+
+		<div class="absolute bottom-4 w-full text-center text-gray-500 font-semibold">By: Luiz F Souza - 18/04/24</div>
 	</div>
 </ion-content>
