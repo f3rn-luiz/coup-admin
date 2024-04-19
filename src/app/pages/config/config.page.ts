@@ -34,12 +34,18 @@ export class ConfigPage implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.configuracao1Form = this._formBuilder.group({
-			numero_jogadores: [2, [Validators.min(2), Validators.max(10)]],
-			numero_vidas: [2, [Validators.min(1)]],
+			numero_jogadores: [0, [Validators.min(2), Validators.max(10)]],
+			numero_vidas: [0, [Validators.min(1)]],
 			dinheiro_inicial: [0, [Validators.min(0)]],
-			custo_golpe_estado: [7, [Validators.min(0)]],
-			golpe_estado_obrigatorio: [10, [Validators.min(0)]],
+			custo_golpe_estado: [0, [Validators.min(0)]],
+			golpe_estado_obrigatorio: [0, [Validators.min(0)]],
 		});
+
+		this._gameService._numero_jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (c) => this.configuracao1Form.get('numero_jogadores')?.setValue(c) });
+		this._gameService._numero_vidas.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (c) => this.configuracao1Form.get('numero_vidas')?.setValue(c) });
+		this._gameService._dinheiro_inicial.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (c) => this.configuracao1Form.get('dinheiro_inicial')?.setValue(c) });
+		this._gameService._custo_golpe_estado.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (c) => this.configuracao1Form.get('custo_golpe_estado')?.setValue(c) });
+		this._gameService._golpe_estado_obrigatorio.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (c) => this.configuracao1Form.get('golpe_estado_obrigatorio')?.setValue(c) });
 
 		this.configuracao2Form = this._formBuilder.group({
 			nome_j0: [''],
