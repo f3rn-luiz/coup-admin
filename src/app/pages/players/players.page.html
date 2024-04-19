@@ -1,0 +1,23 @@
+<ion-content>
+	<div class="relative flex flex-col justify-center items-center h-full w-full">
+		<div class="absolute top-5 w-full text-center text-3xl font-extralight">Sequência dos Players</div>
+
+		<div class="flex flex-col justify-center items-center h-full w-full">
+			<div *ngFor="let jogador of jogadores; index as i" class="w-2/3 mb-2 flex justify-center items-center border border-white rounded-lg p-2">
+				<p class="mr-auto font-semibold">{{i + 1}}</p>
+				<p>{{jogador.nome}}</p>
+			</div>
+			<div class="flex justify-center items-center p-2" (click)="randomizarPosicoes()">
+				<ion-icon class="h-7 w-7" name="shuffle"></ion-icon>
+			</div>
+		</div>
+
+		<div class="absolute bottom-14 flex">
+			<div class="flex justify-center items-center border border-white rounded-full" (click)="backButton()">
+				<ion-icon class="h-7 w-7 m-2" name="caret-back-outline"></ion-icon>
+			</div>
+			<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pl-7 pr-5 text-xl" (click)="true">Jogar <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon></div>
+		</div>
+		<div class="absolute bottom-4 w-full text-center text-gray-500 font-semibold">By: Luiz F Souza - 18/04/24</div>
+	</div>
+</ion-content>
