@@ -15,8 +15,11 @@ export class GameService {
 	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>(null);
 
 	// EM JOGO
-	_rodada: BehaviorSubject<number> = new BehaviorSubject(0);
+	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
+	_turno: BehaviorSubject<number> = new BehaviorSubject(0);
 	_historico_geral: BehaviorSubject<string[] | null> = new BehaviorSubject<string[] | null>(null);
 
 	constructor() {}
+
+	registrarAcao(tipo: number) {}
 }
