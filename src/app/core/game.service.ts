@@ -15,11 +15,45 @@ export class GameService {
 	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>(null);
 
 	// EM JOGO
-	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
 	_turno: BehaviorSubject<number> = new BehaviorSubject(0);
-	_historico_geral: BehaviorSubject<string[] | null> = new BehaviorSubject<string[] | null>(null);
+	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
+	_historico_geral: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(['']);
 
 	constructor() {}
 
-	registrarAcao(tipo: number) {}
+	registrarAcao(tipo: number, qtd: number, ganhou: boolean, jogador: number) {
+		// 0 - Vida / 1 - Dinheiro
+		let mensagem = '';
+		let jogs = this._jogadores.getValue();
+		if (jogs && tipo === 0) mensagem = `${jogs[jogador].nome} PERDEU ${qtd} vida${qtd > 1 ? 's' : ''}`;
+		else if (jogs && tipo === 1) mensagem = `${jogs[jogador].nome} ${ganhou ? 'RECEBEU' : 'PERDEU'} $${qtd}`;
+		this._historico_geral.next([...this._historico_geral.getValue(), mensagem]);
+
+		// AÇÕES
+		if (jogs && tipo === 0) {
+			if (jogs[jogador].vida - qtd !== 0) jogs[jogador].vida = jogs[jogador].vida - qtd;
+			else {
+				jogs.splice(jogador, 1);
+				this._numero_jogadores.next(jogs.length);
+			}
+		} else if (jogs && tipo === 1) {
+			if (ganhou) jogs[jogador].dinheiro = jogs[jogador].dinheiro + qtd;
+			else if (jogs[jogador].dinheiro - qtd <= 0) jogs[jogador].dinheiro = 0;
+			else jogs[jogador].dinheiro = jogs[jogador].dinheiro - qtd;
+		}
+
+		this._jogadores.next(jogs);
+
+		console.log('JOGS: ', jogs);
+
+		console.log('HISTÓRICO: ', this._historico_geral.getValue());
+	}
+
+	registrarTurno() {
+		const turn = this._turno.getValue();
+		const roda = this._rodada.getValue();
+		const joga = this._numero_jogadores.getValue();
+		if ((turn + 1) / roda === joga) this._rodada.next(roda + 1);
+		this._turno.next(turn + 1);
+	}
 }

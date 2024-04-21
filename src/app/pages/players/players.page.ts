@@ -46,4 +46,8 @@ export class PlayersPage implements OnDestroy {
 			this._gameService._jogadores.next(pre_jogads);
 		}
 	}
+
+	jogar() {
+		this._router.navigateByUrl('game');
+	}
 }
