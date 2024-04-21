@@ -31,9 +31,7 @@
 							<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="aumentarValor('dinheiro_inicial')"><ion-icon class="h-5 w-5" name="add"></ion-icon></div>
 						</div>
 					</div>
-
-					<div class="w-4/5 mx-auto border-b border-gray-600 my-10"></div>
-					<div class="w-full">
+					<div class="w-full mt-7">
 						<p class="w-full text-center text-xl mb-2">Custo Golpe de Estado</p>
 						<div class="flex w-52 mx-auto">
 							<div class="flex justify-center items-center border border-white rounded-full h-10 p-2" (click)="diminuirValor('custo_golpe_estado')"><ion-icon class="h-5 w-5" name="remove"></ion-icon></div>
@@ -53,16 +51,18 @@
 				</form>
 			</ng-container>
 			<ng-container *ngIf="fase_conf === 1">
-				<form [formGroup]="configuracao2Form">
-					<ng-container *ngFor="let p of qtdJogadores(); index as i">
-						<div class="w-full mb-2">
-							<div class="flex justify-center items-center w-72 mx-auto">
-								<p class="w-14 mr-2 text-center text-xl">J{{ i + 1 }}:</p>
-								<input class="bg-white text-black pl-2 h-10 w-full text-xl rounded-md" formControlName="nome_j{{i}}" type="text" />
+				<div class="h-3/5 overflow-y-auto mb-auto mt-20">
+					<form [formGroup]="configuracao2Form">
+						<ng-container *ngFor="let p of qtdJogadores(); index as i">
+							<div class="w-full mb-2">
+								<div class="flex justify-center items-center w-72 mx-auto">
+									<p class="w-14 mr-2 text-center text-xl">J{{ i + 1 }}:</p>
+									<input class="bg-white text-black pl-2 h-10 w-full text-xl rounded-md" formControlName="nome_j{{i}}" type="text" />
+								</div>
 							</div>
-						</div>
-					</ng-container>
-				</form>
+						</ng-container>
+					</form>
+				</div>
 			</ng-container>
 
 			<div class="absolute bottom-14 flex">

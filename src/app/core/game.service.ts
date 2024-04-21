@@ -14,6 +14,19 @@ export class GameService {
 	// FASE 2 - Jogadores e Posições
 	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>(null);
 
+	// [
+	// 	{ nome: 'Luiz', vida: 0, dinheiro: 10 },
+	// 	{ nome: 'Bia', vida: 1, dinheiro: 0 },
+	// 	{ nome: 'Xande', vida: 0, dinheiro: 0 },
+	// 	{ nome: 'Tiago', vida: 0, dinheiro: 0 },
+	// 	{ nome: 'Iago', vida: 2, dinheiro: 10 },
+	// 	{ nome: 'Otavio', vida: 0, dinheiro: 0 },
+	// 	{ nome: 'Gu', vida: 2, dinheiro: 0 },
+	// 	{ nome: 'Matheus', vida: 2, dinheiro: 0 },
+	// 	{ nome: 'Bianca', vida: 0, dinheiro: 10 },
+	// 	{ nome: 'Daniel', vida: 0, dinheiro: 0 },
+	// ]
+
 	// EM JOGO
 	_turno: BehaviorSubject<number> = new BehaviorSubject(0);
 	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
@@ -31,11 +44,12 @@ export class GameService {
 
 		// AÇÕES
 		if (jogs && tipo === 0) {
-			if (jogs[jogador].vida - qtd !== 0) jogs[jogador].vida = jogs[jogador].vida - qtd;
-			else {
-				jogs.splice(jogador, 1);
-				this._numero_jogadores.next(jogs.length);
-			}
+			// if (jogs[jogador].vida - qtd !== 0) jogs[jogador].vida = jogs[jogador].vida - qtd;
+			// else {
+			// 	// jogs.splice(jogador, 1);
+			// 	this._numero_jogadores.next(jogs.length);
+			// }
+			jogs[jogador].vida = jogs[jogador].vida - qtd;
 		} else if (jogs && tipo === 1) {
 			if (ganhou) jogs[jogador].dinheiro = jogs[jogador].dinheiro + qtd;
 			else if (jogs[jogador].dinheiro - qtd <= 0) jogs[jogador].dinheiro = 0;
@@ -43,10 +57,6 @@ export class GameService {
 		}
 
 		this._jogadores.next(jogs);
-
-		console.log('JOGS: ', jogs);
-
-		console.log('HISTÓRICO: ', this._historico_geral.getValue());
 	}
 
 	registrarTurno() {
@@ -55,5 +65,12 @@ export class GameService {
 		const joga = this._numero_jogadores.getValue();
 		if ((turn + 1) / roda === joga) this._rodada.next(roda + 1);
 		this._turno.next(turn + 1);
+	}
+
+	resetarPartida() {
+		this._jogadores.next(null);
+		this._rodada.next(1);
+		this._turno.next(0);
+		this._historico_geral.next(['']);
 	}
 }

@@ -69,16 +69,29 @@ export class GamePage implements OnDestroy {
 	}
 
 	registrarTurno() {
-		if (this.jogadores && this.vez + 1 < this.jogadores.length) {
-			document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
-			this.vez++;
-			document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
-		} else {
-			document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
-			this.vez = 0;
-			document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
+		if (this.jogadores) {
+			let forStop = false;
+			for (this.vez; !forStop; ) {
+				console.log('VEZ: ', this.vez);
+				document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
+
+				if (this.vez + 1 < this.jogadores.length) {
+					this.vez++;
+					if (this.jogadores[this.vez].vida > 0) {
+						document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
+						forStop = true;
+					}
+				} else {
+					this.vez = 0;
+					if (this.jogadores[this.vez].vida > 0) {
+						document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
+						forStop = true;
+					}
+				}
+			}
+			this._gameService.registrarTurno();
+			this.isAcao = false;
 		}
-		this._gameService.registrarTurno();
 	}
 
 	registrarAcao(qtd: number, ganhou: boolean) {

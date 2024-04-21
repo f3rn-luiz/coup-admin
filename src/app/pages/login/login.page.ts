@@ -24,7 +24,8 @@ export class LoginPage implements OnInit {
 	}
 
 	entrarAplicativo() {
-		if (this.senhaForm.value.senha !== '12345') this.senhaForm.get('senha')?.setValue(null);
-		else this._router.navigateByUrl('config');
+		// if (this.senhaForm.value.senha !== '12345') this.senhaForm.get('senha')?.setValue(null);
+		// else
+		this._router.navigateByUrl('config');
 	}
 }

@@ -11,7 +11,8 @@
 		<div *ngIf="isAcao" class="absolute flex flex-col justify-center items-center h-full w-full bg-black z-10">
 			<ng-container *ngIf="acao === null">
 				<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pr-7 pl-5 text-xl mb-4 w-52" (click)="acao = 0"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> Vida</div>
-				<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pr-7 pl-5 text-xl w-52" (click)="acao = 1"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> Dinheiro</div>
+				<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pr-7 pl-5 text-xl mb-4 w-52" (click)="acao = 1"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> Dinheiro</div>
+				<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pr-7 pl-5 text-xl w-52" (click)="registrarTurno()"><ion-icon class="mr-4 h-7 w-7" name="play-forward"></ion-icon> Passar</div>
 			</ng-container>
 			<ng-container *ngIf="acao === 0">
 				<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pr-7 pl-5 text-xl mb-4 w-52" (click)="registrarAcao(1, false)"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> -1 Vida</div>
@@ -31,7 +32,10 @@
 			<div class="flex justify-center items-center mx-auto text-red-400 py-2 pr-7 pl-5 text-xl w-52 mt-10" (click)="isAcao = false; acao = null; isClick = null"><ion-icon class="mr-4 h-7 w-7" name="close"></ion-icon> Cancelar</div>
 		</div>
 
-		<div class="absolute top-5 w-full text-center text-3xl font-extralight">Turno: {{ turno }} / Rodada: {{ rodada }}</div>
+		<div class="absolute top-5 w-full text-center text-3xl font-light flex flex-col justify-center items-center">
+			<div class="flex justify-center items-center">Turno: {{ turno }} / Rodada: {{ rodada }}</div>
+			<div class="flex justify-center items-center text-lg">{{ historico[historico.length-1] }}</div>
+		</div>
 
 		<div class="flex flex-col justify-center items-center h-full w-full">
 			<ng-container *ngFor="let jogador of jogadores; index as i">
@@ -39,17 +43,17 @@
 					<ion-icon id="vez-{{i}}" class="h-7 w-7 mr-4" style="color: black" name="caret-forward-outline"></ion-icon>
 
 					<div
-						class="w-2/3 flex justify-center items-center border {{ jogador.dinheiro >= golpe_estado_obrigatorio ? 'border-amber-500 text-amber-500' : 'border-white'}} rounded-lg p-2"
+						class="w-2/3 flex justify-center items-center text-lg border {{ jogador.vida === 0 ? 'border-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'border-amber-400' : 'border-white'}} rounded-lg p-2"
 						(click)="isAcao = true; jogadorClick = i; isClick = true">
-						<p class="font-semibold w-8">{{i + 1}}</p>
-						<p class="mr-auto">{{jogador.nome}}</p>
+						<p class="font-semibold w-8 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">{{i + 1}}</p>
+						<p class="mr-auto {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">{{jogador.nome}}</p>
 
-						<div class="flex justify-center items-center mr-4">
-							<ion-icon class="h-5 w-5 mr-1" name="heart-outline"></ion-icon>
+						<div class="flex justify-center items-center mr-4 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">
+							<ion-icon class="h-5 w-5 mr-1 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}" name="heart-outline"></ion-icon>
 							{{ jogador.vida }}
 						</div>
-						<div class="flex justify-center items-center">
-							<ion-icon class="h-5 w-5 mr-1" name="cash-outline"></ion-icon>
+						<div class="flex justify-center items-center {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">
+							<ion-icon class="h-5 w-5 mr-1 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}" name="cash-outline"></ion-icon>
 							{{ jogador.dinheiro }}
 						</div>
 					</div>
@@ -58,8 +62,8 @@
 		</div>
 
 		<div class="absolute bottom-14 flex">
-			<div class="flex justify-center items-center text-black bg-white rounded-full w-14" (click)="isHistorico = true"><ion-icon class="h-7 w-7 text-black bg-white" name="list"></ion-icon></div>
-			<div class="flex justify-center items-center mx-auto text-black bg-white rounded-full py-2 pr-7 pl-5 text-xl" (click)="isAcao = true; jogadorClick = vez; isClick = false">
+			<div class="flex justify-center items-center text-black bg-white rounded-l-full w-14 mr-1" (click)="isHistorico = true"><ion-icon class="h-7 w-7 text-black bg-white" name="list"></ion-icon></div>
+			<div class="flex justify-center items-center mx-auto text-black bg-white rounded-r-full py-2 pr-7 pl-5 text-xl font-semibold" (click)="isAcao = true; jogadorClick = vez; isClick = false">
 				<ion-icon class="mr-4 h-7 w-7 text-black bg-white" name="add"></ion-icon> Ação
 			</div>
 		</div>

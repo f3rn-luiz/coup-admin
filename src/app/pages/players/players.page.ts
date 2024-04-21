@@ -36,6 +36,7 @@ export class PlayersPage implements OnDestroy {
 		this._unsubscribeAll.next(null);
 		this._unsubscribeAll.complete();
 	}
+
 	backButton() {
 		this._router.navigateByUrl('config');
 	}
@@ -48,6 +49,7 @@ export class PlayersPage implements OnDestroy {
 	}
 
 	jogar() {
+		this._gameService.resetarPartida();
 		this._router.navigateByUrl('game');
 	}
 }
