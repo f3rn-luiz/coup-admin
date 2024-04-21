@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
 	appId: 'com.luizfsouza.coupsimplecounter',
-	appName: 'coup-simple-counter-app',
+	appName: 'COUP Simple Counter',
 	webDir: 'www',
 };
 
