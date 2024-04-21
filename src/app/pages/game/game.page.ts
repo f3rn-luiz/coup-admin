@@ -23,6 +23,7 @@ import { Jogador } from 'src/app/core/game.type';
 })
 export class GamePage implements OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
+	texto_rodape = '';
 
 	jogadores: Jogador[] | null = [];
 
@@ -46,6 +47,7 @@ export class GamePage implements OnDestroy {
 		private _router: Router,
 		private _gameService: GameService,
 	) {
+		this.texto_rodape = _gameService.texto_rodape;
 		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({
 			next: (j) => {
 				this.jogadores = j;

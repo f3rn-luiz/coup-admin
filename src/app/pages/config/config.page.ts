@@ -17,6 +17,8 @@ import { Jogador } from 'src/app/core/game.type';
 export class ConfigPage implements OnInit, OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+	texto_rodape = '';
+
 	configuracao1Form!: UntypedFormGroup;
 	configuracao2Form!: UntypedFormGroup;
 
@@ -30,6 +32,7 @@ export class ConfigPage implements OnInit, OnDestroy {
 		private _gameService: GameService,
 	) {
 		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (j) => (this.jogadores = j) });
+		this.texto_rodape = _gameService.texto_rodape;
 	}
 
 	ngOnInit(): void {

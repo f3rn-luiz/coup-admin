@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
+import { GameService } from 'src/app/core/game.service';
 
 @Component({
 	selector: 'app-login',
@@ -12,10 +13,15 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/ang
 export class LoginPage implements OnInit {
 	senhaForm!: UntypedFormGroup;
 
+	texto_rodape = '';
+
 	constructor(
 		private _formBuilder: UntypedFormBuilder,
+		private _gameService: GameService,
 		private _router: Router,
-	) {}
+	) {
+		this.texto_rodape = _gameService.texto_rodape;
+	}
 
 	ngOnInit(): void {
 		this.senhaForm = this._formBuilder.group({

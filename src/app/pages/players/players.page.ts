@@ -17,6 +17,7 @@ import { Jogador } from 'src/app/core/game.type';
 export class PlayersPage implements OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+	texto_rodape = '';
 	jogadores: Jogador[] | null = [];
 
 	constructor(
@@ -30,6 +31,7 @@ export class PlayersPage implements OnDestroy {
 				_changeDetectorsRef.markForCheck();
 			},
 		});
+		this.texto_rodape = _gameService.texto_rodape;
 	}
 
 	ngOnDestroy(): void {
