@@ -1,3 +1,10 @@
-# coup-simple-counter-app
+# COUP Admin
 
-Um projeto menor do que o "coup-mobile" para rodar em apenas um dispositivo, a proposta desse programa é ser um administrativo de partida pra o jogo de cartas Coup. Substitui a necessidade de ter as moedas, controla e administra o fluxo do jogo, além de possuir um histórico da partida.
+## Descrição
+
+Um aplicativo simples de gerenciamento de partida, baseado no jogo COUP da GrokGames. Feito para descartar a necessidade das moedas, do trabalho de lembrar de quem foi ou será o turno e também para ter um histórico de todas as etapas da partida.
+-	Um projeto menor do que o "coup-mobile" para rodar em apenas um dispositivo por partida.
+-	Criado por Luiz F Souza (f3rn.luiz) no dia 18/04/2024
+
+## Tecnologias
+
