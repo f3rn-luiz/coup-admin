@@ -1,8 +1,8 @@
 {
-	"name": "coup-simple-counter-app",
-	"version": "0.0.1",
-	"author": "Ionic Framework",
-	"homepage": "https://ionicframework.com/",
+	"name": "coup-admin",
+	"version": "1.1.0",
+	"author": "Luiz F Souza",
+	"homepage": "https://github.com/f3rn-luiz",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",

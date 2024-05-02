@@ -1,5 +1,5 @@
 {
-	"name": "coup-simple-counter-app",
+	"name": "coup-admin",
 	"integrations": {
 		"capacitor": {}
 	},
