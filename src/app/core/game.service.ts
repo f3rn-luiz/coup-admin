@@ -70,7 +70,6 @@ export class GameService {
 	}
 
 	resetarPartida() {
-		this._jogadores.next(null);
 		this._rodada.next(1);
 		this._turno.next(0);
 		this._historico_geral.next(['']);
