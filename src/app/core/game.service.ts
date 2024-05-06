@@ -4,7 +4,7 @@ import { Jogador } from './game.type';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
-	public texto_rodape = 'By: Luiz F Souza - 18/04/24 - v1.1.0';
+	public texto_rodape = 'By: Luiz F Souza - v1.2.0';
 
 	// FASE 1 - Básico da Partida
 	_numero_jogadores: BehaviorSubject<number> = new BehaviorSubject(2);
