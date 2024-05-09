@@ -2,7 +2,13 @@
 
 ## Descrição
 
-Um aplicativo simples de gerenciamento de partida, baseado no jogo COUP da GrokGames. Feito para descartar a necessidade das moedas, do trabalho de lembrar de quem foi ou será o turno e também para ter um histórico de todas as etapas da partida.
+Gerenciador de partidas de COUP. Gerencia turnos, moedas e vida e registra ações.
+
+Eleve sua experiência com o aplicativo administrador de partidas do jogo de blefes COUP com o COUP Admin! Este aplicativo facilita e torna suas partidas ainda mais emocionantes, substituindo as moedas físicas e registrando um log completo de ações.
+
+Principais recursos: ✨ Substitua as moedas tradicionais por um sistema digital prático e intuitivo. 📜 Acompanhe todas as jogadas pelo gerenciador de turnos que também inclui um histórico detalhado para resolver conflitos com facilidade. 👥 Participe da comunidade open source e contribua com melhorias para o aplicativo.
+
+Baixe agora o COUP Admin e desfrute de partidas de COUP ainda mais envolventes e estratégicas! Não perca mais tempo com conflitos sobre quem fez o quê - nosso app cuida de tudo para você.
 
 ### Histórico Básico
 
