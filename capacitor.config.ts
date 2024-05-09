@@ -12,7 +12,6 @@ const config: CapacitorConfig = {
 			splashImmersive: true,
 			showSpinner: true,
 			androidSpinnerStyle: 'small',
-			iosSpinnerStyle: 'small',
 		},
 	},
 };
