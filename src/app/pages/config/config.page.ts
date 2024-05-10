@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
@@ -12,7 +12,7 @@ import { Jogador } from 'src/app/core/game.type';
 	templateUrl: 'config.page.html',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [IonIcon, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, ReactiveFormsModule],
+	imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class ConfigPage implements OnInit, OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();

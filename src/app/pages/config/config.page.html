@@ -1,7 +1,9 @@
+<ion-header>
+	<div class="w-full my-4 text-center text-3xl font-extralight">Configuração inicial</div>
+</ion-header>
+
 <ion-content>
 	<div class="relative flex flex-col justify-center items-center h-full w-full">
-		<div class="absolute top-5 w-full text-center text-3xl font-extralight">Configuração inicial</div>
-
 		<div class="flex flex-col justify-center items-center h-full w-full">
 			<ng-container *ngIf="fase_conf === 0">
 				<form [formGroup]="configuracao1Form">
@@ -64,17 +66,17 @@
 					</form>
 				</div>
 			</ng-container>
-
-			<div class="absolute bottom-14 flex">
-				<div *ngIf="fase_conf === 1" class="flex justify-center items-center border border-white rounded-full" (click)="fase_conf = 0">
-					<ion-icon class="h-7 w-7 m-2" name="caret-back-outline"></ion-icon>
-				</div>
-				<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pl-7 pr-5 text-xl" (click)="enviarConfiguracao()">
-					{{fase_conf === 0 ? 'Confirmar' : 'Continuar'}} <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon>
-				</div>
-			</div>
 		</div>
-
-		<div class="absolute bottom-4 w-full text-center text-gray-500 font-semibold">{{ texto_rodape }}</div>
 	</div>
 </ion-content>
+
+<ion-footer>
+	<div class="flex my-4">
+		<div *ngIf="fase_conf === 1" class="flex justify-center items-center border border-white rounded-full" (click)="fase_conf = 0">
+			<ion-icon class="h-7 w-7 m-2" name="caret-back-outline"></ion-icon>
+		</div>
+		<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pl-11 pr-8 text-xl" (click)="enviarConfiguracao()">
+			{{fase_conf === 0 ? 'CONFIRMAR' : 'CONTINUAR'}} <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon>
+		</div>
+	</div>
+</ion-footer>
