@@ -35,15 +35,27 @@ Baixe agora o COUP Admin e desfrute de partidas de COUP ainda mais envolventes e
 
 ## Útil
 
+**Tecnologias utilizadas:**
+
+```bash
+# tecnologias
+* Ionic
+* Capacitor
+* Angular
+* TailwindCSS
+```
+
+<br>
+
 **Dependências necessárias:**
 
 ```bash
-# Padrão
+# padrão
 * NodeJS
 * Angular CLI
 * Ionic CLI
 
-# Build Android
+# build Android
 * Android Studio
 ```
 
@@ -64,9 +76,12 @@ $ ng serve
 **Build do projeto:**
 
 ```bash
+# compilar os icones para o build
+$ npx capacitor-assets generate
+
 # rodar o build do capacitor para android
 $ ionic capacitor build android
 
-# compilar os icones para o build
-$ npx capacitor-assets generate
+# abrir projeto android
+$ ionic capacitor open android
 ```
