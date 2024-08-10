@@ -1,4 +1,4 @@
-# COUP Admin
+<div style="display: flex; width: 100%; justify-content: center; align-items: center; margin-bottom: 50px;"><h1>COUP Admin</h1><span>v1.2</span></div>
 
 ## Descrição
 
