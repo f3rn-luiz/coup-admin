@@ -2,7 +2,11 @@
 
 ## Descrição
 
-Gerenciador de partidas de COUP. Gerencia turnos, moedas e vida e registra ações.
+Gerenciador de partidas open source do jogo de cartas COUP da Grok Games.
+
+-   Controle de turnos e rodadas
+-   Gerenciamento de jogadores, moedas e vida
+-   Registro de ações.
 
 Eleve sua experiência com o aplicativo administrador de partidas do jogo de blefes COUP com o COUP Admin! Este aplicativo facilita e torna suas partidas ainda mais emocionantes, substituindo as moedas físicas e registrando um log completo de ações.
 
@@ -21,10 +25,10 @@ Baixe agora o COUP Admin e desfrute de partidas de COUP ainda mais envolventes e
 ## Tecnologias
 
 <p style="display: flex; justify-content: center; align-items: center; width: 100%">
-  <a href="https://ionic.io/" style="margin-right: 20px" target="blank"><img src="https://images.prismic.io/ionicframeworkcom/66cfdbef-e59d-463a-8e24-12cb233e9d97_ionic+logo+blue.png" width="200" alt="Ionic Logo" /></a>
-  <a href="http://angular.dev/" style="margin-right: 20px" target="blank"><img src="https://seeklogo.com/images/A/angular-icon-logo-5FC0C40EAC-seeklogo.com.png" height="200" alt="Angular Logo" /></a>
-  <a href="https://capacitorjs.com/" style="margin-right: 20px" target="blank"><img src="https://seeklogo.com/images/C/capacitor-logo-DF3634DD70-seeklogo.com.png" width="200" alt="Capacitor Logo" /></a>
-  <a href="https://tailwindcss.com/" target="blank"><img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" height="150" alt="Taiwind Logo" /></a>
+  <a href="https://ionic.io/" style="margin-right: 20px; flex: 1;" target="blank"><img src="https://images.prismic.io/ionicframeworkcom/66cfdbef-e59d-463a-8e24-12cb233e9d97_ionic+logo+blue.png" width="200" alt="Ionic Logo" /></a>
+  <a href="https://capacitorjs.com/" style="margin-right: 20px; flex: 1;" target="blank"><img src="https://seeklogo.com/images/C/capacitor-logo-DF3634DD70-seeklogo.com.png" width="200" alt="Capacitor Logo" /></a>
+  <a href="http://angular.dev/" style="margin-right: 20px; flex: 1;" target="blank"><img src="https://seeklogo.com/images/A/angular-icon-logo-5FC0C40EAC-seeklogo.com.png" alt="Angular Logo" /></a>
+  <a href="https://tailwindcss.com/" target="blank" style="flex: 1;"><img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" alt="Taiwind Logo" /></a>
 </p>
 
 <br>
