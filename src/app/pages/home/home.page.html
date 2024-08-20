@@ -1,11 +1,11 @@
 <ion-content>
-	<div class="relative flex flex-col justify-center items-center h-full w-full">
-		<div class="flex flex-col justify-center items-center h-full w-full">
+	<div class="relative flex h-full w-full flex-col items-center justify-center">
+		<div class="flex h-full w-full flex-col items-center justify-center">
 			<img class="w-3/4" src="assets/logos/logo-grande.png" alt="Logo COUP Admin" />
 
-			<div class="flex justify-center items-center mx-auto border border-white rounded-full py-2 pl-11 pr-8 text-xl mt-28" (click)="entrarAplicativo()">ENTRAR <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon></div>
+			<div class="mx-auto mt-28 flex items-center justify-center rounded-full border border-white py-2 pl-11 pr-8 text-xl" (click)="entrarAplicativo()">ENTRAR <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon></div>
 		</div>
 
-		<div class="absolute bottom-4 w-full text-center text-gray-500 font-semibold">{{ texto_rodape }}</div>
+		<div class="absolute bottom-4 w-full text-center font-semibold text-gray-500">{{ texto_rodape }}</div>
 	</div>
 </ion-content>
