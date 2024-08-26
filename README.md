@@ -24,12 +24,12 @@ Baixe agora o COUP Admin e desfrute de partidas de COUP ainda mais envolventes e
 
 ## Tecnologias
 
-<div style="display: flex; justify-content: center; align-items: center; width: 100%">
-  <a href="https://ionic.io/" style="padding-left: 10px; padding-right: 10px; flex: 1; max-width: 200px; width: 100%;" target="blank"><img src="https://images.prismic.io/ionicframeworkcom/66cfdbef-e59d-463a-8e24-12cb233e9d97_ionic+logo+blue.png" alt="Ionic Logo" /></a>
-  <a href="https://capacitorjs.com/" style="padding-left: 10px; padding-right: 10px; flex: 1; max-width: 200px; width: 100%;" target="blank"><img src="https://seeklogo.com/images/C/capacitor-logo-DF3634DD70-seeklogo.com.png" alt="Capacitor Logo" /></a>
-  <a href="http://angular.dev/" style="padding-left: 10px; padding-right: 10px; flex: 1; max-width: 200px; width: 100%;" target="blank"><img src="https://seeklogo.com/images/A/angular-icon-logo-5FC0C40EAC-seeklogo.com.png" alt="Angular Logo" /></a>
-  <a href="https://tailwindcss.com/" style="padding-left: 10px; padding-right: 10px; flex: 1; max-width: 200px; width: 100%;" target="blank"><img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" alt="Taiwind Logo" /></a>
-</div>
+<p align="center">
+  <a href="https://ionic.io/" target="blank"><img src="https://images.prismic.io/ionicframeworkcom/66cfdbef-e59d-463a-8e24-12cb233e9d97_ionic+logo+blue.png" width="150" alt="Ionic Logo" /></a>
+  <a href="https://capacitorjs.com/" target="blank"><img src="https://seeklogo.com/images/C/capacitor-logo-DF3634DD70-seeklogo.com.png" width="150" alt="Capacitor Logo" /></a>
+  <a href="http://angular.dev/" target="blank"><img src="https://seeklogo.com/images/A/angular-icon-logo-5FC0C40EAC-seeklogo.com.png" width="150" alt="Angular Logo" /></a>
+  <a href="https://tailwindcss.com/" target="blank"><img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" height="125" alt="Taiwind Logo" /></a>
+</p>
 
 <br>
 
