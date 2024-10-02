@@ -46,11 +46,6 @@ export class GameService {
 
 		// AÇÕES
 		if (jogs && tipo === 0) {
-			// if (jogs[jogador].vida - qtd !== 0) jogs[jogador].vida = jogs[jogador].vida - qtd;
-			// else {
-			// 	// jogs.splice(jogador, 1);
-			// 	this._numero_jogadores.next(jogs.length);
-			// }
 			jogs[jogador].vida = jogs[jogador].vida - qtd;
 		} else if (jogs && tipo === 1) {
 			if (ganhou) jogs[jogador].dinheiro = jogs[jogador].dinheiro + qtd;
