@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
@@ -74,7 +74,6 @@ export class GamePage implements OnDestroy {
 		if (this.jogadores) {
 			let forStop = false;
 			for (this.vez; !forStop; ) {
-				console.log('VEZ: ', this.vez);
 				document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
 
 				if (this.vez + 1 < this.jogadores.length) {
