@@ -90,6 +90,10 @@ export class ConfigPage implements OnInit, OnDestroy {
 		this._changeDetectorsRef.markForCheck();
 	}
 
+	voltarHome() {
+		this._route.navigate(['']);
+	}
+
 	enviarConfiguracao() {
 		if (this.fase_conf === 0) {
 			if (this.configuracao1Form.valid) {
