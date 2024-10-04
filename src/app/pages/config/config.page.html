@@ -1,114 +1,104 @@
 <ion-header>
-	<div class="my-4 w-full text-center text-3xl font-extralight">{{fase_conf === 0 ? 'Configuração da Partida' : 'Apelido dos Jogadores'}}</div>
+	<div class="my-4 w-full text-center text-3xl font-extralight">Configuração da Partida</div>
 </ion-header>
 
 <ion-content>
 	<div class="relative flex h-full w-full flex-col items-center justify-center">
-		<ng-container *ngIf="fase_conf === 0">
-			<form class="w-full overflow-y-auto pb-2" [formGroup]="configuracao1Form">
-				<div class="flex w-full flex-col items-center justify-center">
-					<p class="mb-2 text-xl">Jogadores</p>
-					<div class="flex items-center justify-center">
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('numero_jogadores')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
-						</div>
-						<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="numero_jogadores" type="number" readonly />
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('numero_jogadores')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
-						</div>
+		<form class="w-full overflow-y-auto pb-2" [formGroup]="configuracaoForm">
+			<div class="flex w-full flex-col items-center justify-center">
+				<p class="mb-2 text-xl">Jogadores</p>
+				<div class="flex items-center justify-center">
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('numero_jogadores')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+					</div>
+					<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="numero_jogadores" type="number" readonly />
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('numero_jogadores')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
 					</div>
 				</div>
+			</div>
 
-				<div class="mt-7 flex w-full flex-col items-center justify-center">
-					<p class="mb-2 text-xl">Vida</p>
-					<div class="flex items-center justify-center">
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('numero_vidas')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
-						</div>
-						<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="numero_vidas" type="number" readonly />
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('numero_vidas')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
-						</div>
+			<div class="mt-7 flex w-full flex-col items-center justify-center">
+				<p class="mb-2 text-xl">Vida</p>
+				<div class="flex items-center justify-center">
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('numero_vidas')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+					</div>
+					<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="numero_vidas" type="number" readonly />
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('numero_vidas')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
 					</div>
 				</div>
+			</div>
 
-				<div class="mt-7 flex w-full flex-col items-center justify-center">
-					<p class="mb-2 text-xl">Dinheiro Inicial</p>
-					<div class="flex items-center justify-center">
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('dinheiro_inicial')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
-						</div>
-						<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="dinheiro_inicial" type="number" readonly />
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('dinheiro_inicial')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
-						</div>
+			<div class="mt-7 flex w-full flex-col items-center justify-center">
+				<p class="mb-2 text-xl">Dinheiro Inicial</p>
+				<div class="flex items-center justify-center">
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('dinheiro_inicial')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+					</div>
+					<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="dinheiro_inicial" type="number" readonly />
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('dinheiro_inicial')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
 					</div>
 				</div>
-				<div class="mt-7 flex w-full flex-col items-center justify-center">
-					<p class="mb-2 text-xl">Custo Golpe de Estado</p>
-					<div class="flex items-center justify-center">
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('custo_golpe_estado')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
-						</div>
-						<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="custo_golpe_estado" type="number" readonly />
-						<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('custo_golpe_estado')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
-						</div>
+			</div>
+			<div class="mt-7 flex w-full flex-col items-center justify-center">
+				<p class="mb-2 text-xl">Custo Golpe de Estado</p>
+				<div class="flex items-center justify-center">
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('custo_golpe_estado')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+					</div>
+					<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="custo_golpe_estado" type="number" readonly />
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('custo_golpe_estado')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
 					</div>
 				</div>
+			</div>
 
-				<div class="mt-7 flex w-full flex-col items-center justify-center">
-					<p class="mb-2 text-xl">Golpe de Estado Obrigatório</p>
-					<div class="flex items-center justify-center">
-						<div
-							class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white"
-							(click)="diminuirValor('golpe_estado_obrigatorio')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
-						</div>
-						<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="golpe_estado_obrigatorio" type="number" readonly />
-						<div
-							class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white"
-							(click)="aumentarValor('golpe_estado_obrigatorio')">
-							<ion-ripple-effect></ion-ripple-effect>
-							<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
-						</div>
+			<div class="mt-7 flex w-full flex-col items-center justify-center">
+				<p class="mb-2 text-xl">Golpe de Estado Obrigatório</p>
+				<div class="flex items-center justify-center">
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="diminuirValor('golpe_estado_obrigatorio')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+					</div>
+					<input class="h-12 w-20 bg-white text-center text-2xl font-semibold text-black" formControlName="golpe_estado_obrigatorio" type="number" readonly />
+					<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-r-full border-y border-r border-white" (click)="aumentarValor('golpe_estado_obrigatorio')">
+						<ion-ripple-effect></ion-ripple-effect>
+						<ion-icon class="absolute bg-transparent text-3xl" name="chevron-forward-outline"></ion-icon>
 					</div>
 				</div>
-			</form>
-		</ng-container>
-		<ng-container *ngIf="fase_conf === 1">
-			<form class="w-full overflow-y-auto py-2" [formGroup]="configuracao2Form">
-				<ng-container *ngFor="let p of qtdJogadores(); index as i">
-					<div class="mb-2 w-full">
-						<div class="relative mx-auto flex min-w-24 max-w-72 items-center justify-center">
-							<p class="absolute left-2 top-0 bg-transparent text-sm text-black">Jogador {{ i + 1 }}:</p>
-							<input class="h-12 w-full rounded-md bg-white pt-2 text-center text-xl text-black" formControlName="nome_j{{i}}" type="text" maxlength="20" />
-						</div>
-					</div>
-				</ng-container>
-			</form>
-		</ng-container>
+			</div>
+
+			<div class="mt-10 flex w-full flex-col items-center justify-center">
+				<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-zinc-500 py-2 pl-8 pr-14 text-xl" (click)="resetarConfiguracao()">
+					<ion-ripple-effect></ion-ripple-effect>
+					<span class="z-10 bg-transparent text-zinc-500">Limpar</span>
+					<ion-icon class="absolute right-3 bg-transparent text-3xl text-zinc-500" name="trash-outline"></ion-icon>
+				</div>
+			</div>
+		</form>
 	</div>
 </ion-content>
 
 <ion-footer>
 	<div class="my-4 flex items-center justify-center">
-		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="fase_conf === 0 ? voltarHome() : fase_conf = 0">
+		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="voltarHome()">
 			<ion-ripple-effect></ion-ripple-effect>
 			<ion-icon class="absolute bg-transparent text-3xl" name="caret-back-outline"></ion-icon>
 		</div>
 		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border border-white py-2 pl-8 pr-14 text-xl" (click)="enviarConfiguracao()">
 			<ion-ripple-effect></ion-ripple-effect>
-			<span class="z-10 bg-transparent">{{fase_conf === 0 ? 'JOGADORES' : 'ORDEM'}}</span>
+			<span class="z-10 bg-transparent">JOGADORES</span>
 			<ion-icon class="absolute right-3 bg-transparent text-3xl" name="caret-forward-outline"></ion-icon>
 		</div>
 	</div>

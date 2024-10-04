@@ -1,23 +1,40 @@
+<ion-header>
+	<div class="my-4 w-full text-center text-3xl font-extralight">Jogadores</div>
+</ion-header>
+
 <ion-content>
-	<div class="relative flex h-full w-full flex-col items-center justify-center">
-		<div class="absolute top-5 w-full text-center text-3xl font-extralight">Sequência dos Players</div>
+	<div *ngIf="form_iniciado" class="relative flex h-full w-full flex-col items-center justify-center">
+		<form class="w-full overflow-y-auto py-2" [formGroup]="jogadoresForm">
+			<ng-container *ngFor="let jogador of quantidadeJogadores(); index as i">
+				<div class="mb-2 w-full">
+					<div class="relative mx-auto flex min-w-24 max-w-72 items-center justify-center">
+						<p class="absolute left-2 top-0 bg-transparent text-sm text-black">Jogador {{ i + 1 }}:</p>
+						<input class="h-12 w-full rounded-md bg-white pt-2 text-center text-xl text-black" formControlName="nome_jog_{{i}}" type="text" maxlength="20" />
+					</div>
+				</div>
+			</ng-container>
 
-		<div class="flex h-full w-full flex-col items-center justify-center">
-			<div *ngFor="let jogador of jogadores; index as i" class="mb-2 flex w-2/3 items-center justify-center rounded-lg border border-white p-2">
-				<p class="mr-auto font-semibold">{{i + 1}}</p>
-				<p>{{jogador.nome}}</p>
+			<div class="mt-4 flex w-full flex-col items-center justify-center">
+				<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-zinc-500 py-2 pl-8 pr-14 text-xl" (click)="embaralharJogadores()">
+					<ion-ripple-effect></ion-ripple-effect>
+					<span class="z-10 bg-transparent text-zinc-500">Embaralhar</span>
+					<ion-icon class="absolute right-3 bg-transparent text-3xl text-zinc-500" name="shuffle-outline"></ion-icon>
+				</div>
 			</div>
-			<div class="flex items-center justify-center p-2" (click)="randomizarPosicoes()">
-				<ion-icon class="h-7 w-7" name="shuffle"></ion-icon>
-			</div>
-		</div>
-
-		<div class="absolute bottom-14 flex">
-			<div class="flex items-center justify-center rounded-full border border-white" (click)="backButton()">
-				<ion-icon class="m-2 h-7 w-7" name="caret-back-outline"></ion-icon>
-			</div>
-			<div class="mx-auto flex items-center justify-center rounded-full border border-white py-2 pl-7 pr-5 text-xl" (click)="jogar()">Jogar <ion-icon class="ml-4 h-7 w-7" name="caret-forward-outline"></ion-icon></div>
-		</div>
-		<div class="absolute bottom-4 w-full text-center font-semibold text-gray-500">{{ texto_rodape }}</div>
+		</form>
 	</div>
 </ion-content>
+
+<ion-footer>
+	<div class="my-4 flex items-center justify-center">
+		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="voltarConfig()">
+			<ion-ripple-effect></ion-ripple-effect>
+			<ion-icon class="absolute bg-transparent text-3xl" name="caret-back-outline"></ion-icon>
+		</div>
+		<div id="btn_comecar_jogo" class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border border-white py-2 pl-8 pr-14 text-xl" (click)="confirmarJogadores()">
+			<ion-ripple-effect></ion-ripple-effect>
+			<span class="z-10 bg-transparent">COMEÇAR JOGO</span>
+			<ion-icon class="absolute right-3 bg-transparent text-3xl" name="caret-forward-outline"></ion-icon>
+		</div>
+	</div>
+</ion-footer>
