@@ -1,3 +1,10 @@
+<ion-header>
+	<div class="my-4 flex w-full flex-col items-center justify-center">
+		<div class="w-full text-center text-3xl font-extralight">Turno: {{ turno }} - Rodada: {{ rodada }}</div>
+		<div *ngIf="historico" class="w-full text-center font-extralight text-zinc-400">{{ historico[historico.length-1] }}</div>
+	</div>
+</ion-header>
+
 <ion-content>
 	<div class="relative flex h-full w-full flex-col items-center justify-center">
 		<div *ngIf="isHistorico" class="absolute z-10 flex h-full w-full flex-col items-center justify-center bg-black">
@@ -32,12 +39,7 @@
 			<div class="mx-auto mt-10 flex w-52 items-center justify-center py-2 pl-5 pr-7 text-xl text-red-400" (click)="isAcao = false; acao = null; isClick = null"><ion-icon class="mr-4 h-7 w-7" name="close"></ion-icon> Cancelar</div>
 		</div>
 
-		<div class="absolute top-5 flex w-full flex-col items-center justify-center text-center text-3xl font-light">
-			<div class="flex items-center justify-center">Turno: {{ turno }} / Rodada: {{ rodada }}</div>
-			<div class="flex items-center justify-center text-lg">{{ historico[historico.length-1] }}</div>
-		</div>
-
-		<div class="flex h-full w-full flex-col items-center justify-center">
+		<div class="flex w-full flex-1 flex-col items-center justify-center overflow-y-auto">
 			<ng-container *ngFor="let jogador of jogadores; index as i">
 				<div class="mb-2 flex w-full items-center justify-center">
 					<ion-icon id="vez-{{i}}" class="mr-4 h-7 w-7" style="color: black" name="caret-forward-outline"></ion-icon>
@@ -60,13 +62,23 @@
 				</div>
 			</ng-container>
 		</div>
-
-		<div class="absolute bottom-14 flex">
-			<div class="mr-1 flex w-14 items-center justify-center rounded-l-full bg-white text-black" (click)="isHistorico = true"><ion-icon class="h-7 w-7 bg-white text-black" name="list"></ion-icon></div>
-			<div class="mx-auto flex items-center justify-center rounded-r-full bg-white py-2 pl-5 pr-7 text-xl font-semibold text-black" (click)="isAcao = true; jogadorClick = vez; isClick = false">
-				<ion-icon class="mr-4 h-7 w-7 bg-white text-black" name="add"></ion-icon> Ação
-			</div>
-		</div>
-		<div class="absolute bottom-4 w-full text-center font-semibold text-gray-500">{{ texto_rodape }}</div>
 	</div>
 </ion-content>
+
+<ion-footer>
+	<div class="mt-4 flex items-center justify-center">
+		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-black bg-white px-4" (click)="isHistorico = true">
+			<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
+			<ion-icon class="bg-transparent text-3xl text-black" name="list"></ion-icon>
+		</div>
+		<div
+			id="btn_comecar_jogo"
+			class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border border-black bg-white py-2 pl-8 pr-14 text-xl text-black"
+			(click)="isAcao = true; jogadorClick = vez; isClick = false">
+			<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
+			<span class="z-10 bg-transparent font-semibold text-black">AÇÃO</span>
+			<ion-icon class="absolute right-3 bg-transparent text-3xl text-black" name="add"></ion-icon>
+		</div>
+	</div>
+	<div class="w-full py-2 text-center font-semibold text-zinc-500">{{ texto_rodape }}</div>
+</ion-footer>

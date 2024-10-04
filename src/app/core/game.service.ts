@@ -7,32 +7,55 @@ export class GameService {
 	public texto_rodape = 'By: Luiz F Souza - v1.3.0';
 
 	// FASE 1 - Básico da Partida
-	_numero_jogadores: BehaviorSubject<number> = new BehaviorSubject(2);
+	_numero_jogadores: BehaviorSubject<number> = new BehaviorSubject(10);
 	_numero_vidas: BehaviorSubject<number> = new BehaviorSubject(2);
 	_dinheiro_inicial: BehaviorSubject<number> = new BehaviorSubject(0);
 	_custo_golpe_estado: BehaviorSubject<number> = new BehaviorSubject(7);
 	_golpe_estado_obrigatorio: BehaviorSubject<number> = new BehaviorSubject(10);
 
 	// FASE 2 - Jogadores e Posições
-	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>(null);
-
-	// [
-	// 	{ nome: 'Luiz', vida: 0, dinheiro: 10 },
-	// 	{ nome: 'Bia', vida: 1, dinheiro: 0 },
-	// 	{ nome: 'Xande', vida: 0, dinheiro: 0 },
-	// 	{ nome: 'Tiago', vida: 0, dinheiro: 0 },
-	// 	{ nome: 'Iago', vida: 2, dinheiro: 10 },
-	// 	{ nome: 'Otavio', vida: 0, dinheiro: 0 },
-	// 	{ nome: 'Gu', vida: 2, dinheiro: 0 },
-	// 	{ nome: 'Matheus', vida: 2, dinheiro: 0 },
-	// 	{ nome: 'Bianca', vida: 0, dinheiro: 10 },
-	// 	{ nome: 'Daniel', vida: 0, dinheiro: 0 },
-	// ]
+	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>([
+		{ nome: 'Luiz', vida: 0, dinheiro: 7 },
+		{ nome: 'Bia', vida: 1, dinheiro: 5 },
+		{ nome: 'Xande', vida: 0, dinheiro: 3 },
+		{ nome: 'Tiago', vida: 0, dinheiro: 9 },
+		{ nome: 'Iago', vida: 2, dinheiro: 10 },
+		{ nome: 'Otavio', vida: 0, dinheiro: 4 },
+		{ nome: 'Gu', vida: 2, dinheiro: 4 },
+		{ nome: 'Matheus', vida: 2, dinheiro: 3 },
+		{ nome: 'Bianca', vida: 0, dinheiro: 10 },
+		{ nome: 'Daniel', vida: 0, dinheiro: 6 },
+	]);
 
 	// EM JOGO
 	_turno: BehaviorSubject<number> = new BehaviorSubject(0);
 	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
-	_historico_geral: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(['']);
+	_historico_geral: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
+		'Luiz cabeçudo',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+		'Teste roliço',
+	]);
 
 	constructor() {}
 

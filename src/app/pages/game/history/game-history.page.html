@@ -1,0 +1,25 @@
+<ion-header>
+	<div class="my-4 w-full text-center text-3xl font-extralight">Histórico</div>
+</ion-header>
+
+<ion-content>
+	<div class="relative flex h-full w-full flex-col items-center justify-center">
+		<ng-container *ngFor="let hist of historico; index as idx">
+			<div class="mb-1 flex w-full items-center">
+				<p class="w-12 text-nowrap text-right">{{ idx }}</p>
+				<p class="w-10 text-nowrap text-center">-></p>
+				<p class="flex-1">{{ hist }}</p>
+			</div>
+		</ng-container>
+	</div>
+</ion-content>
+
+<ion-footer>
+	<div class="my-4 flex w-full flex-col items-center justify-center">
+		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border py-2 pl-14 pr-8 text-xl" (click)="true">
+			<ion-ripple-effect></ion-ripple-effect>
+			<ion-icon class="absolute left-3 bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+			<span class="z-10 bg-transparent">VOLTAR</span>
+		</div>
+	</div>
+</ion-footer>

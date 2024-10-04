@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
@@ -18,8 +17,7 @@ import { Jogador } from 'src/app/core/game.type';
 		`,
 	],
 	standalone: true,
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [IonIcon, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, ReactiveFormsModule],
+	imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class GamePage implements OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -42,18 +40,9 @@ export class GamePage implements OnDestroy {
 	jogadorClick: number = -1;
 	isClick: any = null;
 
-	constructor(
-		private _changeDetectorsRef: ChangeDetectorRef,
-		private _router: Router,
-		private _gameService: GameService,
-	) {
+	constructor(private _gameService: GameService) {
 		this.texto_rodape = _gameService.texto_rodape;
-		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({
-			next: (j) => {
-				this.jogadores = j;
-				_changeDetectorsRef.markForCheck();
-			},
-		});
+		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (j) => (this.jogadores = j) });
 		_gameService._turno.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (t) => (this.turno = t) });
 		_gameService._rodada.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (r) => (this.rodada = r) });
 		_gameService._historico_geral.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (h) => (this.historico = h) });
