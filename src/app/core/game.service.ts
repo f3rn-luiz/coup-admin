@@ -64,9 +64,23 @@ export class GameService {
 		this._turno.next(turn + 1);
 	}
 
+	resetarConfiguracao() {
+		this._numero_jogadores.next(2);
+		this._numero_vidas.next(2);
+		this._dinheiro_inicial.next(0);
+		this._custo_golpe_estado.next(7);
+		this._golpe_estado_obrigatorio.next(10);
+		this._jogadores.next(null);
+	}
+
 	resetarPartida() {
 		this._rodada.next(1);
 		this._turno.next(0);
 		this._historico_geral.next(['']);
+	}
+
+	resetarTUDO() {
+		this.resetarConfiguracao();
+		this.resetarPartida();
 	}
 }

@@ -20,6 +20,7 @@ export class LoginPage {
 	}
 
 	entrarAplicativo() {
+		this._gameService.resetarTUDO();
 		this._router.navigateByUrl('config');
 	}
 }
