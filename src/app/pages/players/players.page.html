@@ -1,5 +1,5 @@
 <ion-header>
-	<div class="my-4 w-full text-center text-3xl font-extralight">Jogadores</div>
+	<div class="my-4 w-full text-center text-3xl font-light">Jogadores</div>
 </ion-header>
 
 <ion-content>
@@ -17,8 +17,8 @@
 			<div class="mt-4 flex w-full flex-col items-center justify-center">
 				<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-zinc-500 py-2 pl-8 pr-14 text-xl" (click)="embaralharJogadores()">
 					<ion-ripple-effect></ion-ripple-effect>
-					<span class="z-10 bg-transparent text-zinc-500">Embaralhar</span>
-					<ion-icon class="absolute right-3 bg-transparent text-3xl text-zinc-500" name="shuffle-outline"></ion-icon>
+					<span class="z-10 bg-transparent text-zinc-400">Embaralhar</span>
+					<ion-icon class="absolute right-3 bg-transparent text-3xl text-zinc-400" name="shuffle-outline"></ion-icon>
 				</div>
 			</div>
 		</form>
@@ -27,11 +27,11 @@
 
 <ion-footer>
 	<div class="my-4 flex items-center justify-center">
-		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-white" (click)="voltarConfig()">
+		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-l-full border-y-2 border-l-2 border-white" (click)="voltarConfig()">
 			<ion-ripple-effect></ion-ripple-effect>
 			<ion-icon class="absolute bg-transparent text-3xl" name="caret-back-outline"></ion-icon>
 		</div>
-		<div id="btn_comecar_jogo" class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border border-white py-2 pl-8 pr-14 text-xl" (click)="confirmarJogadores()">
+		<div id="btn_comecar_jogo" class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border-2 border-white py-2 pl-8 pr-14 text-xl" (click)="confirmarJogadores()">
 			<ion-ripple-effect></ion-ripple-effect>
 			<span class="z-10 bg-transparent">COMEÇAR JOGO</span>
 			<ion-icon class="absolute right-3 bg-transparent text-3xl" name="caret-forward-outline"></ion-icon>
