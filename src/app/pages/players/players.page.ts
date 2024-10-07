@@ -73,7 +73,6 @@ export class PlayersPage implements OnInit, OnDestroy {
 	async mostrarAlerta() {
 		const alert = await this._alertController.create({
 			mode: 'ios',
-			backdropDismiss: false,
 			header: 'Campos em branco!',
 			message: 'Preencha todos os campos corretamente!',
 			buttons: ['OK'],
