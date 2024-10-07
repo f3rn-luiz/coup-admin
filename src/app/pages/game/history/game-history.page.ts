@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 
@@ -16,12 +16,19 @@ export class GameHistoryPage implements OnDestroy {
 
 	historico: string[] = [''];
 
-	constructor(private _gameService: GameService) {
+	constructor(
+		private _gameService: GameService,
+		private _modalController: ModalController,
+	) {
 		this._gameService._historico_geral.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (h) => (this.historico = h) });
 	}
 
 	ngOnDestroy(): void {
 		this._unsubscribeAll.next(null);
 		this._unsubscribeAll.complete();
+	}
+
+	sairHistorico() {
+		this._modalController.dismiss();
 	}
 }
