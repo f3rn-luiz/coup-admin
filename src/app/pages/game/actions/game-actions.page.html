@@ -1,0 +1,45 @@
+<ion-header>
+	<ion-toolbar>
+		<div class="my-4 w-full text-center text-3xl font-light">Ação</div>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="flex h-full w-full flex-col items-center justify-center">
+		<div class="flex w-full flex-col items-center justify-center py-2">
+			<ng-container *ngIf="acao === null">
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 0"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> Vida</div>
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 1"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> Dinheiro</div>
+				<div class="mx-auto flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('turno', null, null)"><ion-icon class="mr-4 h-7 w-7" name="play-forward"></ion-icon> Passar</div>
+			</ng-container>
+			<ng-container *ngIf="acao === 0">
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('vida', 1, false)"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> -1 Vida</div>
+			</ng-container>
+			<ng-container *ngIf="acao === 1">
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 1, true)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> +1</div>
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 2, true)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> +2</div>
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 3, true)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> +3</div>
+				<br />
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 2, false)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> -2</div>
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 3, false)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> -3</div>
+				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', custo_golpe_estado, false)">
+					<ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> -{{custo_golpe_estado}}
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<div class="mb-4 mt-2 flex w-full flex-col items-center justify-center">
+			<div
+				class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-2 py-2 pl-14 pr-8 text-xl"
+				(click)="acao !== null ? acao = null : sairAcoes('sair', null, null)">
+				<ion-ripple-effect></ion-ripple-effect>
+				<ion-icon class="absolute left-3 bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
+				<span class="z-10 bg-transparent">VOLTAR</span>
+			</div>
+		</div>
+	</ion-toolbar>
+</ion-footer>

@@ -1,44 +1,14 @@
 <ion-header>
-	<div class="my-4 flex w-full flex-col items-center justify-center">
-		<div class="w-full text-center text-3xl font-extralight">Turno: {{ turno }} - Rodada: {{ rodada }}</div>
-		<div *ngIf="historico" class="w-full text-center font-extralight text-zinc-400">{{ historico[historico.length-1] }}</div>
-	</div>
+	<ion-toolbar>
+		<div class="mb-2 mt-4 flex w-full flex-col items-center justify-center" (click)="mostrarHistorico()">
+			<div class="w-full text-center text-3xl font-light">Turno: {{ turno }} - Rodada: {{ rodada }}</div>
+			<div *ngIf="historico" class="w-full text-center font-light text-zinc-400">{{ historico[0] }}</div>
+		</div>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
 	<div class="relative flex h-full w-full flex-col items-center justify-center">
-		<div *ngIf="isHistorico" class="absolute z-10 flex h-full w-full flex-col items-center justify-center bg-black">
-			<ng-container *ngFor="let hist of historico">
-				<p class="mb-1">{{ hist }}</p>
-			</ng-container>
-
-			<div class="mx-auto mt-10 flex w-52 items-center justify-center py-2 pl-5 pr-7 text-xl text-red-400" (click)="isHistorico = false"><ion-icon class="mr-4 h-7 w-7" name="close"></ion-icon> Fechar</div>
-		</div>
-
-		<div *ngIf="isAcao" class="absolute z-10 flex h-full w-full flex-col items-center justify-center bg-black">
-			<ng-container *ngIf="acao === null">
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 0"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> Vida</div>
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 1"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> Dinheiro</div>
-				<div class="mx-auto flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarTurno()"><ion-icon class="mr-4 h-7 w-7" name="play-forward"></ion-icon> Passar</div>
-			</ng-container>
-			<ng-container *ngIf="acao === 0">
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(1, false)"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> -1 Vida</div>
-			</ng-container>
-			<ng-container *ngIf="acao === 1">
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(1, true)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> +1</div>
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(2, true)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> +2</div>
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(3, true)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> +3</div>
-				<br />
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(2, false)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> -2</div>
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(3, false)"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> -3</div>
-				<div class="mx-auto mb-4 flex w-52 items-center justify-center rounded-full border border-white py-2 pl-5 pr-7 text-xl" (click)="registrarAcao(custo_golpe_estado, false)">
-					<ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> -{{custo_golpe_estado}}
-				</div>
-			</ng-container>
-
-			<div class="mx-auto mt-10 flex w-52 items-center justify-center py-2 pl-5 pr-7 text-xl text-red-400" (click)="isAcao = false; acao = null; isClick = null"><ion-icon class="mr-4 h-7 w-7" name="close"></ion-icon> Cancelar</div>
-		</div>
-
 		<div class="flex w-full flex-1 flex-col items-center justify-center overflow-y-auto">
 			<ng-container *ngFor="let jogador of jogadores; index as i">
 				<div class="mb-2 flex w-full items-center justify-center">
@@ -46,7 +16,7 @@
 
 					<div
 						class="w-2/3 flex justify-center items-center text-lg border {{ jogador.vida === 0 ? 'border-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'border-amber-400' : 'border-white'}} rounded-lg p-2"
-						(click)="isAcao = true; jogadorClick = i; isClick = true">
+						(click)="mostrarAcoes(i)">
 						<p class="font-semibold w-8 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">{{i + 1}}</p>
 						<p class="mr-auto {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">{{jogador.nome}}</p>
 
@@ -66,19 +36,25 @@
 </ion-content>
 
 <ion-footer>
-	<div class="mt-4 flex items-center justify-center">
-		<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-l-full border-y border-l border-black bg-white px-4" (click)="isHistorico = true">
-			<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
-			<ion-icon class="bg-transparent text-3xl text-black" name="list"></ion-icon>
+	<ion-toolbar>
+		<div class="relative mt-2 flex items-center justify-center">
+			<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-l-full bg-white px-4" (click)="mostrarHistorico()">
+				<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
+				<ion-icon class="bg-transparent text-3xl text-black" name="list"></ion-icon>
+			</div>
+			<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border-l border-black bg-white py-2 pl-8 pr-14 text-xl text-black" (click)="mostrarAcoes(null)">
+				<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
+				<span class="z-10 bg-transparent font-semibold text-black">AÇÃO</span>
+				<ion-icon class="absolute right-3 bg-transparent text-3xl text-black" name="add"></ion-icon>
+			</div>
+
+			<div class="absolute right-2">
+				<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full px-4 py-2 text-xl" (click)="true">
+					<ion-ripple-effect></ion-ripple-effect>
+					<ion-icon class="bg-transparent text-3xl text-zinc-400" name="settings-outline"></ion-icon>
+				</div>
+			</div>
 		</div>
-		<div
-			id="btn_comecar_jogo"
-			class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border border-black bg-white py-2 pl-8 pr-14 text-xl text-black"
-			(click)="isAcao = true; jogadorClick = vez; isClick = false">
-			<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
-			<span class="z-10 bg-transparent font-semibold text-black">AÇÃO</span>
-			<ion-icon class="absolute right-3 bg-transparent text-3xl text-black" name="add"></ion-icon>
-		</div>
-	</div>
-	<div class="w-full py-2 text-center font-semibold text-zinc-500">{{ texto_rodape }}</div>
+		<div class="w-full py-2 text-center font-semibold text-zinc-400">{{ texto_rodape }}</div>
+	</ion-toolbar>
 </ion-footer>

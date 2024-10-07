@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
+import { GameActionsPage } from './actions/game-actions.page';
+import { GameHistoryPage } from './history/game-history.page';
 
 @Component({
 	selector: 'app-game',
@@ -28,19 +30,15 @@ export class GamePage implements OnDestroy {
 	vez: number = 0;
 	turno: number = 0;
 	rodada: number = 0;
-	historico: string[] = [''];
+	historico: string[] = [];
 
 	custo_golpe_estado: number = 0;
 	golpe_estado_obrigatorio: number = 0;
 
-	isHistorico: boolean = false;
-
-	isAcao: boolean = false;
-	acao: any = null;
-	jogadorClick: number = -1;
-	isClick: any = null;
-
-	constructor(private _gameService: GameService) {
+	constructor(
+		private _gameService: GameService,
+		private _modalController: ModalController,
+	) {
 		this.texto_rodape = _gameService.texto_rodape;
 		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (j) => (this.jogadores = j) });
 		_gameService._turno.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (t) => (this.turno = t) });
@@ -57,6 +55,25 @@ export class GamePage implements OnDestroy {
 
 	ionViewDidEnter() {
 		document.getElementById(`vez-0`)?.classList.add('vez-player');
+	}
+
+	async mostrarHistorico() {
+		const modal = await this._modalController.create({
+			component: GameHistoryPage,
+		});
+		modal.present();
+	}
+
+	async mostrarAcoes(jogador: number | null) {
+		const modal = await this._modalController.create({
+			component: GameActionsPage,
+		});
+		modal.present();
+		const { data } = await modal.onWillDismiss();
+		if (data.tipo !== 'sair') {
+			if (data.tipo === 'turno') this.registrarTurno();
+			else this.registrarAcao(data.tipo, data.valor, data.ganhou, jogador);
+		}
 	}
 
 	registrarTurno() {
@@ -80,16 +97,11 @@ export class GamePage implements OnDestroy {
 				}
 			}
 			this._gameService.registrarTurno();
-			this.isAcao = false;
 		}
 	}
 
-	registrarAcao(qtd: number, ganhou: boolean) {
-		this._gameService.registrarAcao(this.acao, qtd, ganhou, this.jogadorClick);
-		this.acao = null;
-		this.isAcao = false;
-		this.jogadorClick = -1;
-		if (!this.isClick) this.registrarTurno();
-		this.isClick = null;
+	registrarAcao(acao: string, qtd: number, ganhou: boolean, click: number | null) {
+		this._gameService.registrarAcao(acao === 'vida' ? 0 : 1, qtd, ganhou, click ?? this.vez);
+		if (click === null) this.registrarTurno();
 	}
 }
