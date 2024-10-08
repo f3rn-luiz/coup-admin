@@ -31,52 +31,47 @@ export class GameService {
 	_turno: BehaviorSubject<number> = new BehaviorSubject(0);
 	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
 	_historico_geral: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([
-		// 'Luiz PERDEU 1 vida',
-		// 'Bia PERDEU 1 vida',
-		// 'Xande PERDEU 1 vida',
-		// 'Tiago PERDEU 1 vida',
-		// 'Iago RECEBEU $2',
-		// 'Otavio PERDEU 1 vida',
 		// 'Gu RECEBEU $2',
-		// 'Matheus RECEBEU $2',
-		// 'Bianca PERDEU 1 vida',
-		// 'Daniel PERDEU 1 vida',
-		// 'Luiz PERDEU 1 vida',
-		// 'Bia RECEBEU $3',
-		// 'Xande PERDEU 1 vida',
-		// 'Bianca RECEBEU $10',
-		// 'Tiago RECEBEU $2',
-		// 'Iago RECEBEU $3',
-		// 'Otavio PERDEU 1 vida',
-		// 'Gu RECEBEU $2',
-		// 'Matheus RECEBEU $1',
-		// 'Bianca PERDEU 1 vida',
 		// 'Daniel RECEBEU $2',
-		// 'Luiz PERDEU 1 vida',
-		// 'Bia RECEBEU $2',
-		// 'Xande PERDEU $2',
-		// 'Xande RECEBEU $3',
-		// 'Tiago RECEBEU $3',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Daniel RECEBEU $2',
+		// 'Matheus RECEBEU $1',
+		// 'Gu RECEBEU $2',
+		// 'Otavio PERDEU 1 vida',
 		// 'Iago RECEBEU $5',
-		// 'Otavio PERDEU 1 vida',
-		// 'Gu RECEBEU $2',
+		// 'Tiago RECEBEU $3',
+		// 'Xande RECEBEU $3',
+		// 'Xande PERDEU $2',
+		// 'Bia RECEBEU $2',
+		// 'Luiz PERDEU 1 vida',
+		// 'Daniel RECEBEU $2',
+		// 'Bianca PERDEU 1 vida',
 		// 'Matheus RECEBEU $1',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
-		// 'Daniel RECEBEU $2',
 		// 'Gu RECEBEU $2',
+		// 'Iago RECEBEU $3',
+		// 'Tiago RECEBEU $2',
+		// 'Bianca RECEBEU $10',
+		// 'Xande PERDEU 1 vida',
+		// 'Bia RECEBEU $3',
+		// 'Luiz PERDEU 1 vida',
+		// 'Daniel PERDEU 1 vida',
+		// 'Bianca PERDEU 1 vida',
+		// 'Otavio PERDEU 1 vida',
+		// 'Iago RECEBEU $2',
+		// 'Tiago PERDEU 1 vida',
+		// 'Xande PERDEU 1 vida',
+		// 'Bia PERDEU 1 vida',
+		// 'Luiz PERDEU 1 vida',
 	]);
 
 	constructor() {}
@@ -87,7 +82,7 @@ export class GameService {
 		let jogs = this._jogadores.getValue();
 		if (jogs && tipo === 0) mensagem = `${jogs[jogador].nome} PERDEU ${qtd} vida${qtd > 1 ? 's' : ''}`;
 		else if (jogs && tipo === 1) mensagem = `${jogs[jogador].nome} ${ganhou ? 'RECEBEU' : 'PERDEU'} $${qtd}`;
-		this._historico_geral.next([...this._historico_geral.getValue(), mensagem]);
+		this._historico_geral.next([mensagem, ...this._historico_geral.getValue()]);
 
 		// AÇÕES
 		if (jogs && tipo === 0) {
@@ -122,6 +117,10 @@ export class GameService {
 		this._rodada.next(1);
 		this._turno.next(0);
 		this._historico_geral.next([]);
+		this._jogadores.value?.map((j) => {
+			j.dinheiro = this._dinheiro_inicial.value;
+			j.vida = this._numero_vidas.value;
+		});
 	}
 
 	resetarTUDO() {

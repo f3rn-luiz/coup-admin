@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
@@ -30,6 +31,7 @@ export class GamePage implements OnDestroy {
 	vez: number = 0;
 	turno: number = 0;
 	rodada: number = 0;
+	fim_jogo: boolean = false;
 	historico: string[] = [];
 
 	custo_golpe_estado: number = 0;
@@ -38,6 +40,8 @@ export class GamePage implements OnDestroy {
 	constructor(
 		private _gameService: GameService,
 		private _modalController: ModalController,
+		private _alertController: AlertController,
+		private _router: Router,
 	) {
 		this.texto_rodape = _gameService.texto_rodape;
 		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (j) => (this.jogadores = j) });
@@ -73,6 +77,58 @@ export class GamePage implements OnDestroy {
 		if (data.tipo !== 'sair') {
 			if (data.tipo === 'turno') this.registrarTurno();
 			else this.registrarAcao(data.tipo, data.valor, data.ganhou, jogador);
+			this.verificarVivos();
+		}
+	}
+
+	async mostrarOpcoes() {
+		const alert = await this._alertController.create({
+			mode: 'ios',
+			header: 'OPÇÕES',
+			buttons: [
+				{ text: 'Reiniciar partida', role: 'reiniciar' },
+				{ text: 'Ir para a tela inicial', role: 'inicio' },
+				{ text: 'Fechar', role: 'cancel' },
+			],
+		});
+		alert.present();
+		const option = await alert.onWillDismiss();
+		if (option.role !== 'cancel' && option.role !== 'backdrop') {
+			if (option.role === 'reiniciar') this._gameService.resetarPartida();
+			else if (option.role === 'inicio') this._router.navigateByUrl('');
+		}
+	}
+
+	async mostrarGanhador() {
+		const alert = await this._alertController.create({
+			mode: 'ios',
+			header: 'Fim de Jogo!',
+			message: `${this.jogadores ? this.jogadores[this.vez].nome : '-'} ganhou!`,
+			buttons: [
+				{ text: 'Reiniciar partida', role: 'reiniciar' },
+				{ text: 'Ir para a tela inicial', role: 'inicio' },
+				{ text: 'Fechar', role: 'cancel' },
+			],
+		});
+		alert.present();
+		const option = await alert.onWillDismiss();
+		if (option.role !== 'cancel' && option.role !== 'backdrop') {
+			if (option.role === 'reiniciar') {
+				this._gameService.resetarPartida();
+				this.fim_jogo = false;
+			} else if (option.role === 'inicio') this._router.navigateByUrl('');
+		}
+	}
+
+	verificarVivos() {
+		let vivos = 0;
+		if (this.jogadores)
+			this.jogadores.forEach((j) => {
+				if (j.vida > 0) vivos++;
+			});
+		if (vivos === 1) {
+			this.fim_jogo = true;
+			this.mostrarGanhador();
 		}
 	}
 
