@@ -53,3 +53,7 @@ ion-toolbar,
 ion-content {
 	--background: #000000;
 }
+
+ion-alert {
+	--backdrop-opacity: 0.6 !important;
+}
