@@ -21,6 +21,7 @@ log.txt
 /.ionic
 /www
 /android
+/ios
 /platforms
 /plugins
 
@@ -44,7 +45,6 @@ yarn-error.log
 .settings/
 *.sublime-project
 *.sublime-workspace
-.nx
 
 # Visual Studio Code
 .vscode/*
@@ -59,6 +59,8 @@ yarn-error.log
 /.angular
 /.angular/cache
 .sass-cache/
+/.nx
+/.nx/cache
 /connect.lock
 /coverage
 /libpeerconnection.log
