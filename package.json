@@ -68,5 +68,13 @@
 		"tailwindcss": "^3.4.13",
 		"typescript": "~5.4.0"
 	},
-	"description": "Um projeto feito por Luiz F Souza (f3rn-luiz)"
+	"description": "Um projeto feito por Luiz F Souza (f3rn-luiz)",
+	"browserslist": [
+		"Chrome >=79",
+		"ChromeAndroid >=79",
+		"Firefox >=70",
+		"Edge >=79",
+		"Safari >=14",
+		"iOS >=14"
+	]
 }
