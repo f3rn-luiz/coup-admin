@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 
@@ -21,6 +21,7 @@ export class ConfigPage implements OnInit, OnDestroy {
 		private _formBuilder: UntypedFormBuilder,
 		private _route: Router,
 		private _gameService: GameService,
+		private _alertController: AlertController,
 	) {}
 
 	ngOnInit(): void {
@@ -56,6 +57,15 @@ export class ConfigPage implements OnInit, OnDestroy {
 
 	resetarConfiguracao = () => this._gameService.resetarConfiguracao();
 
+	async mostrarAlerta() {
+		const alerta = await this._alertController.create({
+			header: 'Configure Corretamente!',
+			message: 'A configuração da partida não está correta. Revise os itens e tente novamente.',
+			buttons: ['OK'],
+		});
+		alerta.present();
+	}
+
 	enviarConfiguracao() {
 		if (this.configuracaoForm.valid) {
 			this._gameService._numero_jogadores.next(this.configuracaoForm.get('numero_jogadores')?.value);
@@ -64,6 +74,6 @@ export class ConfigPage implements OnInit, OnDestroy {
 			this._gameService._custo_golpe_estado.next(this.configuracaoForm.get('custo_golpe_estado')?.value);
 			this._gameService._golpe_estado_obrigatorio.next(this.configuracaoForm.get('golpe_estado_obrigatorio')?.value);
 			this._route.navigateByUrl('players');
-		}
+		} else this.mostrarAlerta();
 	}
 }
