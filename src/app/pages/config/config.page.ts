@@ -50,7 +50,13 @@ export class ConfigPage implements OnInit, OnDestroy {
 	}
 
 	diminuirValor(campo: string) {
-		if (this.configuracaoForm.get(campo)?.value - 1 >= 0) this.configuracaoForm.get(campo)?.setValue(this.configuracaoForm.get(campo)?.value - 1);
+		if (this.configuracaoForm.get(campo)?.value - 1 >= 0 && this.verificarValorMinimo(campo)) this.configuracaoForm.get(campo)?.setValue(this.configuracaoForm.get(campo)?.value - 1);
+	}
+
+	verificarValorMinimo(campo: string) {
+		if (campo === 'numero_jogadores' && this.configuracaoForm.get(campo)?.value - 1 < 2) return false;
+		else if (campo === 'numero_vidas' && this.configuracaoForm.get(campo)?.value - 1 < 1) return false;
+		else return true;
 	}
 
 	voltarHome = () => this._route.navigateByUrl('');
