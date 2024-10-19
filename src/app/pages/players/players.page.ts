@@ -74,7 +74,7 @@ export class PlayersPage implements OnInit, OnDestroy {
 		const alert = await this._alertController.create({
 			mode: 'ios',
 			header: 'Campos em branco!',
-			message: 'Preencha todos os campos corretamente!',
+			subHeader: 'Preencha todos os campos corretamente!',
 			buttons: ['OK'],
 		});
 		alert.present();

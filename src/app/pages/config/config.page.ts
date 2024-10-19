@@ -66,7 +66,7 @@ export class ConfigPage implements OnInit, OnDestroy {
 	async mostrarAlerta() {
 		const alerta = await this._alertController.create({
 			header: 'Configure Corretamente!',
-			message: 'A configuração da partida não está correta. Revise os itens e tente novamente.',
+			subHeader: 'A configuração da partida não está correta. Revise os itens e tente novamente.',
 			buttons: ['OK'],
 		});
 		alerta.present();
