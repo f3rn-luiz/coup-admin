@@ -4,6 +4,19 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 ---
 
+## 1.4.0 (??-10-2024)
+
+### Feature
+
+-   **Validação do Config:** implementação de uma validação robusta na página de configuração antes da partida.
+
+### Fix
+
+-   **Dependências:** remoção e correção de dependências não necessárias e deprecated.
+-   **Botões dos Alert:** minimo de altura e tamanho dos botões escolhido por padrão, a fim de melhor acessibilidade.
+
+<br>
+
 ## 1.3.0 (14-10-2024) - 1º na Google Play Store
 
 ### Refactor
