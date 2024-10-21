@@ -1,6 +1,4 @@
-# COUP Admin - v1.2
-
-## Descrição
+# COUP Admin
 
 Gerenciador de partidas open source do jogo de cartas COUP da Grok Games.
 
@@ -16,9 +14,12 @@ Baixe agora o COUP Admin e desfrute de partidas de COUP ainda mais envolventes e
 
 ### Histórico Básico
 
+Para o histórico mais detalhado, veja o arquivo CHANGELOG na pasta raiz do projeto
+
 -   Elaborado por Luiz F Souza (f3rn.luiz) no dia 18/04/2024
 -   1ª versão alfa lançada e testada dia 20/04/2024
 -   1º patch de atualizações e correções lançado e testado dia 21/04/2024
+-   1º versão estável lançada na Google Play Store para Teste Fechado dia 14/10/2024
 
 <br>
 
