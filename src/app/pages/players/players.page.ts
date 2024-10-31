@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, IonicModule } from '@ionic/angular';
+import { AlertController, IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar } from '@ionic/angular/standalone';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
 import { Jogador } from 'src/app/core/game.type';
@@ -11,7 +11,7 @@ import { Jogador } from 'src/app/core/game.type';
 	selector: 'app-players',
 	templateUrl: 'players.page.html',
 	standalone: true,
-	imports: [IonicModule, CommonModule, ReactiveFormsModule],
+	imports: [IonFooter, IonIcon, IonRippleEffect, IonContent, IonToolbar, IonHeader, CommonModule, ReactiveFormsModule],
 })
 export class PlayersPage implements OnInit, OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();

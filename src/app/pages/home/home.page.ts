@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonButton, IonContent, IonFooter, IonIcon, IonToolbar } from '@ionic/angular/standalone';
 import { GameService } from 'src/app/core/game.service';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: 'home.page.html',
 	standalone: true,
-	imports: [IonicModule],
+	imports: [IonContent, IonButton, IonFooter, IonToolbar, IonIcon],
 })
 export class LoginPage {
 	texto_rodape = '';
