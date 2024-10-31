@@ -44,7 +44,12 @@ export class GamePage implements OnDestroy {
 		private _router: Router,
 	) {
 		this.texto_rodape = _gameService.texto_rodape;
-		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (j) => (this.jogadores = j) });
+		_gameService._jogadores.pipe(takeUntil(this._unsubscribeAll)).subscribe({
+			next: (j) => {
+				this.jogadores = j;
+				if (!j || j.length === 0) _router.navigateByUrl('');
+			},
+		});
 		_gameService._turno.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (t) => (this.turno = t) });
 		_gameService._rodada.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (r) => (this.rodada = r) });
 		_gameService._historico_geral.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (h) => (this.historico = h) });
