@@ -14,6 +14,9 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 -   **Dependências:** remoção e correção de dependências não necessárias e deprecated.
 -   **Botões dos Alert:** minimo de altura e tamanho dos botões escolhido por padrão, a fim de melhor acessibilidade.
+-   **Icones:** correção de icones dependente https para interno offline.
+-   **Componentes Ionic:** IonicModal não estava passando para o build, remoção do mesmo e implementação individual dos respectivos imports.
+-   **Modal e Alert Controller:** após a correção anterior, um conflito de implementação apareceu no programa, foi convertido o import de '@ionic/angular' para '@ionic/angular/standalone'.
 
 <br>
 
