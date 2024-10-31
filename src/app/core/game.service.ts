@@ -96,12 +96,20 @@ export class GameService {
 		this._jogadores.next(jogs);
 	}
 
-	registrarTurno() {
+	registrarTurno(ant: number, pro: number) {
 		const turn = this._turno.getValue();
 		const roda = this._rodada.getValue();
-		const joga = this._numero_jogadores.getValue();
-		if ((turn + 1) / roda === joga) this._rodada.next(roda + 1);
+		if (ant > pro) this._rodada.next(roda + 1);
 		this._turno.next(turn + 1);
+	}
+
+	contarVivos(): number {
+		let vivos = 0;
+		if (this._jogadores.value)
+			this._jogadores.value.forEach((j) => {
+				if (j.vida > 0) vivos++;
+			});
+		return vivos;
 	}
 
 	resetarConfiguracao() {

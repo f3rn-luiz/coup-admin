@@ -116,17 +116,15 @@ export class GamePage implements OnDestroy {
 			if (option.role === 'reiniciar') {
 				this._gameService.resetarPartida();
 				this.fim_jogo = false;
+				document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
+				this.vez = 0;
+				document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
 			} else if (option.role === 'inicio') this._router.navigateByUrl('');
 		}
 	}
 
 	verificarVivos() {
-		let vivos = 0;
-		if (this.jogadores)
-			this.jogadores.forEach((j) => {
-				if (j.vida > 0) vivos++;
-			});
-		if (vivos === 1) {
+		if (this._gameService.contarVivos() === 1) {
 			this.fim_jogo = true;
 			this.mostrarGanhador();
 		}
@@ -134,6 +132,7 @@ export class GamePage implements OnDestroy {
 
 	registrarTurno() {
 		if (this.jogadores) {
+			const ant_vez = this.vez;
 			let forStop = false;
 			for (this.vez; !forStop; ) {
 				document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
@@ -152,7 +151,7 @@ export class GamePage implements OnDestroy {
 					}
 				}
 			}
-			this._gameService.registrarTurno();
+			this._gameService.registrarTurno(ant_vez, this.vez);
 		}
 	}
 
