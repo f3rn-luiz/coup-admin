@@ -9,6 +9,11 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 ### Feature
 
 -   **Validação do Config:** implementação de uma validação robusta na página de configuração antes da partida.
+-   **Validação de Jogadores:** quando não há jogadores, o usuário será redirecionado para a home.
+
+### Refactor
+
+-   **Contagem Turno / Rodada:** refatoração na contagem de Turno / Rodada que não contava corretamente ao decorrer da partida quando jogadores morriam.
 
 ### Fix
 
@@ -17,21 +22,22 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 -   **Icones:** correção de icones dependente https para interno offline.
 -   **Componentes Ionic:** IonicModal não estava passando para o build, remoção do mesmo e implementação individual dos respectivos imports.
 -   **Modal e Alert Controller:** após a correção anterior, um conflito de implementação apareceu no programa, foi convertido o import de '@ionic/angular' para '@ionic/angular/standalone'.
+-   **Reinicio da partida:** correção do reinicio da partida no final e nas opções, não resetava todos os dados corretamente.
 
 <br>
 
 ## 1.3.0 (14-10-2024) - 1º na Google Play Store
+
+### Feature
+
+-   **Opções:** implementado a tela de opções da partida enquanto no meio do jogo.
+-   **Fim da Partida:** implementado do aviso de finalização da partida e seu respectivo vencedor.
 
 ### Refactor
 
 -   **Framework:** atualização completa do framework para Ionic 8 e suas dependências.
 -   **Transição das Páginas:** refatoração para o bom funcionamento das transições das páginas.
 -   **Interface:** correções de interface e disposição das páginas, para uma estética agradável e padronizada.
-
-### Feature
-
--   **Opções:** implementado a tela de opções da partida enquanto no meio do jogo.
--   **Fim da Partida:** implementado do aviso de finalização da partida e seu respectivo vencedor.
 
 ### Fix
 
