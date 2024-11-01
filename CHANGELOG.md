@@ -4,16 +4,18 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 ---
 
-## 1.4.0 (??-10-2024)
+## 1.4.0 (??-11-2024)
 
 ### Feature
 
 -   **Validação do Config:** implementação de uma validação robusta na página de configuração antes da partida.
 -   **Validação de Jogadores:** quando não há jogadores, o usuário será redirecionado para a home.
+-   **Registro da Ação 'Passar':** se o jogador usa um efeito de carta que não implica na vida ou no dinheiro, agora aparece no histórico como 'jogador usou uma carta'.
 
 ### Refactor
 
 -   **Contagem Turno / Rodada:** refatoração na contagem de Turno / Rodada que não contava corretamente ao decorrer da partida quando jogadores morriam.
+-   **Card dos Jogadores:** refatoração completa do visual dos cards dos jogadores, seus comportamentos e animações.
 
 ### Fix
 
