@@ -70,8 +70,7 @@ export class GamePage implements OnDestroy {
 		modal.present();
 		const { data } = await modal.onWillDismiss();
 		if (data.tipo !== 'sair') {
-			if (data.tipo === 'turno') this.registrarTurno();
-			else this.registrarAcao(data.tipo, data.valor, data.ganhou, jogador);
+			this.registrarAcao(data.tipo, data.valor, data.ganhou, jogador);
 			this.verificarVivos();
 		}
 	}
@@ -91,7 +90,7 @@ export class GamePage implements OnDestroy {
 		if (option.role !== 'cancel' && option.role !== 'backdrop') {
 			if (option.role === 'reiniciar') this.resetarPartida();
 			else if (option.role === 'inicio') {
-				this.resetarPartida;
+				this.resetarPartida();
 				this._router.navigateByUrl('');
 			}
 		}
@@ -145,7 +144,7 @@ export class GamePage implements OnDestroy {
 	}
 
 	registrarAcao(acao: string, qtd: number, ganhou: boolean, click: number | null) {
-		this._gameService.registrarAcao(acao === 'vida' ? 0 : 1, qtd, ganhou, click ?? this.vez);
+		this._gameService.registrarAcao(acao, qtd, ganhou, click ?? this.vez);
 		if (click === null) this.registrarTurno();
 	}
 
