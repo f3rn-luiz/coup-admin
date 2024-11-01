@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar, ModalController } from '@ionic/angular/standalone';
@@ -15,7 +15,7 @@ import { GameHistoryPage } from './history/game-history.page';
 	standalone: true,
 	imports: [IonHeader, IonToolbar, IonContent, IonIcon, IonFooter, IonRippleEffect, CommonModule, ReactiveFormsModule],
 })
-export class GamePage implements OnInit, OnDestroy {
+export class GamePage implements OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 	texto_rodape = '';
 
@@ -50,11 +50,8 @@ export class GamePage implements OnInit, OnDestroy {
 		_gameService._custo_golpe_estado.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (g) => (this.custo_golpe_estado = g) });
 	}
 
-	ngOnInit(): void {
-		this.vez = 0;
-	}
-
 	ngOnDestroy(): void {
+		this.resetarPartida();
 		this._unsubscribeAll.next(null);
 		this._unsubscribeAll.complete();
 	}
@@ -92,8 +89,11 @@ export class GamePage implements OnInit, OnDestroy {
 		alert.present();
 		const option = await alert.onWillDismiss();
 		if (option.role !== 'cancel' && option.role !== 'backdrop') {
-			if (option.role === 'reiniciar') this._gameService.resetarPartida();
-			else if (option.role === 'inicio') this._router.navigateByUrl('');
+			if (option.role === 'reiniciar') this.resetarPartida();
+			else if (option.role === 'inicio') {
+				this.resetarPartida;
+				this._router.navigateByUrl('');
+			}
 		}
 	}
 
@@ -112,10 +112,11 @@ export class GamePage implements OnInit, OnDestroy {
 		const option = await alert.onWillDismiss();
 		if (option.role !== 'cancel' && option.role !== 'backdrop') {
 			if (option.role === 'reiniciar') {
-				this._gameService.resetarPartida();
-				this.fim_jogo = false;
-				this.vez = 0;
-			} else if (option.role === 'inicio') this._router.navigateByUrl('');
+				this.resetarPartida();
+			} else if (option.role === 'inicio') {
+				this.resetarPartida();
+				this._router.navigateByUrl('');
+			}
 		}
 	}
 
@@ -146,5 +147,11 @@ export class GamePage implements OnInit, OnDestroy {
 	registrarAcao(acao: string, qtd: number, ganhou: boolean, click: number | null) {
 		this._gameService.registrarAcao(acao === 'vida' ? 0 : 1, qtd, ganhou, click ?? this.vez);
 		if (click === null) this.registrarTurno();
+	}
+
+	resetarPartida() {
+		this._gameService.resetarPartida();
+		this.fim_jogo = false;
+		this.vez = 0;
 	}
 }
