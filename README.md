@@ -68,8 +68,11 @@ Para o histórico mais detalhado, veja o arquivo CHANGELOG na pasta raiz do proj
 # instalar todos os pacotes e dependências
 $ npm install
 
-# start padrão
+# start padrão :4200
 $ ng serve
+
+# start alternativo :8100
+$ ionic serve
 ```
 
 <br>
@@ -77,12 +80,15 @@ $ ng serve
 **Build do projeto:**
 
 ```bash
+# rodar o build do ionic
+$ ionic build --prod
+
+# sincronizar o build por meio do capacitor para android
+$ ionic capacitor sync android
+
 # compilar os icones para o build
 $ npx capacitor-assets generate
 
-# rodar o build do capacitor para android
-$ ionic capacitor build android
-
-# abrir projeto android
+# abrir projeto android no android studio
 $ ionic capacitor open android
 ```
