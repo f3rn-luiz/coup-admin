@@ -66,3 +66,48 @@ ion-content {
 ion-alert {
 	--backdrop-opacity: 0.6 !important;
 }
+
+/* status do jogador */
+.player-normal {
+	@apply border-white;
+
+	#ponteiro {
+		@apply bg-white;
+	}
+
+	div {
+		@apply text-white;
+	}
+
+	ion-icon {
+		@apply text-white;
+	}
+}
+
+.player-rico {
+	@apply border-amber-400;
+
+	#ponteiro {
+		@apply bg-amber-400;
+	}
+
+	div {
+		@apply text-amber-400;
+	}
+
+	ion-icon {
+		@apply text-amber-400;
+	}
+}
+
+.player-morto {
+	@apply border-red-700;
+
+	div {
+		@apply text-red-700;
+	}
+
+	ion-icon {
+		@apply text-red-900;
+	}
+}

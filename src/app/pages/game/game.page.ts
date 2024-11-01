@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar, ModalController } from '@ionic/angular/standalone';
@@ -12,17 +12,10 @@ import { GameHistoryPage } from './history/game-history.page';
 @Component({
 	selector: 'app-game',
 	templateUrl: 'game.page.html',
-	styles: [
-		`
-			.vez-player {
-				color: white !important;
-			}
-		`,
-	],
 	standalone: true,
 	imports: [IonHeader, IonToolbar, IonContent, IonIcon, IonFooter, IonRippleEffect, CommonModule, ReactiveFormsModule],
 })
-export class GamePage implements OnDestroy {
+export class GamePage implements OnInit, OnDestroy {
 	private _unsubscribeAll: Subject<any> = new Subject<any>();
 	texto_rodape = '';
 
@@ -57,13 +50,13 @@ export class GamePage implements OnDestroy {
 		_gameService._custo_golpe_estado.pipe(takeUntil(this._unsubscribeAll)).subscribe({ next: (g) => (this.custo_golpe_estado = g) });
 	}
 
+	ngOnInit(): void {
+		this.vez = 0;
+	}
+
 	ngOnDestroy(): void {
 		this._unsubscribeAll.next(null);
 		this._unsubscribeAll.complete();
-	}
-
-	ionViewDidEnter() {
-		document.getElementById(`vez-0`)?.classList.add('vez-player');
 	}
 
 	async mostrarHistorico() {
@@ -121,9 +114,7 @@ export class GamePage implements OnDestroy {
 			if (option.role === 'reiniciar') {
 				this._gameService.resetarPartida();
 				this.fim_jogo = false;
-				document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
 				this.vez = 0;
-				document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
 			} else if (option.role === 'inicio') this._router.navigateByUrl('');
 		}
 	}
@@ -140,20 +131,12 @@ export class GamePage implements OnDestroy {
 			const ant_vez = this.vez;
 			let forStop = false;
 			for (this.vez; !forStop; ) {
-				document.getElementById(`vez-${this.vez}`)?.classList.remove('vez-player');
-
 				if (this.vez + 1 < this.jogadores.length) {
 					this.vez++;
-					if (this.jogadores[this.vez].vida > 0) {
-						document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
-						forStop = true;
-					}
+					if (this.jogadores[this.vez].vida > 0) forStop = true;
 				} else {
 					this.vez = 0;
-					if (this.jogadores[this.vez].vida > 0) {
-						document.getElementById(`vez-${this.vez}`)?.classList.add('vez-player');
-						forStop = true;
-					}
+					if (this.jogadores[this.vez].vida > 0) forStop = true;
 				}
 			}
 			this._gameService.registrarTurno(ant_vez, this.vez);

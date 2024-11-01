@@ -9,25 +9,23 @@
 
 <ion-content>
 	<div class="relative flex h-full w-full flex-col items-center justify-center">
-		<div class="flex w-full flex-1 flex-col items-center justify-center overflow-y-auto">
-			<ng-container *ngFor="let jogador of jogadores; index as i">
-				<div class="mb-2 flex w-full items-center justify-center">
-					<ion-icon id="vez-{{i}}" class="mr-4 h-7 w-7" style="color: black" name="caret-forward-outline"></ion-icon>
+		<div class="flex w-full flex-col items-center overflow-y-auto py-2">
+			<ng-container *ngFor="let jogador of jogadores; index as idx">
+				<div
+					class="mb-2 flex max-h-12 min-h-12 w-4/5 items-center justify-between overflow-hidden rounded-md pr-2 transition-all duration-300 {{ idx === vez ? 'border-2' : 'opacity-65 border' }}"
+					[ngClass]="jogador.vida > 0 ? jogador.dinheiro >= golpe_estado_obrigatorio ? 'player-rico' : 'player-normal' : 'player-morto'"
+					(click)="jogador.vida > 0 ? mostrarAcoes(idx) : null">
+					<div class="flex items-center justify-center">
+						<div id="ponteiro" class="h-8 w-2 rounded-r-md transition-all duration-300  {{ idx === vez ? '' : 'opacity-0' }}"></div>
+						<div class="ml-2 font-semibold transition-all duration-300">{{ jogador.nome }}</div>
+					</div>
 
-					<div
-						class="w-2/3 flex justify-center items-center text-lg border {{ jogador.vida === 0 ? 'border-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'border-amber-400' : 'border-white'}} rounded-lg p-2"
-						(click)="mostrarAcoes(i)">
-						<p class="font-semibold w-8 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">{{i + 1}}</p>
-						<p class="mr-auto {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">{{jogador.nome}}</p>
-
-						<div class="flex justify-center items-center mr-4 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">
-							<ion-icon class="h-5 w-5 mr-1 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}" name="heart-outline"></ion-icon>
-							{{ jogador.vida }}
+					<div class="flex items-center justify-center">
+						<div class="relative mx-2 flex w-10 items-center justify-center">
+							<div class="z-10 font-bold text-black transition-all duration-300">{{ jogador.vida > 0 ? jogador.vida : '' }}</div>
+							<ion-icon class="absolute size-10 transition-all duration-300" [name]="jogador.vida > 0 ? 'heart' : 'heart-dislike'"></ion-icon>
 						</div>
-						<div class="flex justify-center items-center {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}">
-							<ion-icon class="h-5 w-5 mr-1 {{ jogador.vida === 0 ? 'text-red-600' : jogador.dinheiro >= golpe_estado_obrigatorio ? 'text-amber-400' : ''}}" name="cash-outline"></ion-icon>
-							{{ jogador.dinheiro }}
-						</div>
+						<div class="w-12 text-lg font-bold transition-all duration-300">${{ jogador.dinheiro }}</div>
 					</div>
 				</div>
 			</ng-container>
@@ -43,20 +41,11 @@
 				<ion-icon class="bg-transparent text-3xl text-black" name="list"></ion-icon>
 			</div>
 			<div
-				*ngIf="!fim_jogo"
 				class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border-l border-black bg-white py-2 pl-8 pr-14 text-xl text-black"
-				(click)="mostrarAcoes(null)">
+				(click)="fim_jogo ? mostrarGanhador() : mostrarAcoes(null)">
 				<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
-				<span class="z-10 bg-transparent font-semibold text-black">AÇÃO</span>
-				<ion-icon class="absolute right-3 bg-transparent text-3xl text-black" name="add"></ion-icon>
-			</div>
-			<div
-				*ngIf="fim_jogo"
-				class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-r-full border-l border-black bg-white py-2 pl-8 pr-14 text-xl text-black"
-				(click)="mostrarGanhador()">
-				<ion-ripple-effect class="bg-transparent text-black"></ion-ripple-effect>
-				<span class="z-10 bg-transparent font-semibold text-black">FIM</span>
-				<ion-icon class="absolute right-3 bg-transparent text-3xl text-black" name="checkmark-done-outline"></ion-icon>
+				<span class="z-10 bg-transparent font-semibold text-black">{{fim_jogo ? 'FIM' : 'AÇÃO'}}</span>
+				<ion-icon class="absolute right-3 bg-transparent text-3xl text-black" [name]="fim_jogo ? 'checkmark-done-outline' : 'add'"></ion-icon>
 			</div>
 
 			<div *ngIf="!fim_jogo" class="absolute right-2">
