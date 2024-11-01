@@ -29,7 +29,7 @@ export class GameActionsPage implements OnDestroy {
 		this._unsubscribeAll.complete();
 	}
 
-	sairAcoes(tipo: string, valor: number | null, ganhou: boolean | null) {
+	sairAcoes(tipo: string, valor: number, ganhou: boolean) {
 		this._modalController.dismiss({ tipo, valor, ganhou });
 	}
 }

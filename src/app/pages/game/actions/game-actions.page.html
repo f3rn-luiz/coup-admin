@@ -10,7 +10,7 @@
 			<ng-container *ngIf="acao === null">
 				<div class="mx-auto mb-4 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 0"><ion-icon class="mr-4 h-7 w-7" name="heart"></ion-icon> Vida</div>
 				<div class="mx-auto mb-4 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 1"><ion-icon class="mr-4 h-7 w-7" name="cash"></ion-icon> Dinheiro</div>
-				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('turno', null, null)">
+				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('turno', 0, false)">
 					<ion-icon class="mr-4 h-7 w-7" name="play-forward"></ion-icon> Passar
 				</div>
 			</ng-container>
@@ -35,9 +35,7 @@
 <ion-footer>
 	<ion-toolbar>
 		<div class="mb-4 mt-2 flex w-full flex-col items-center justify-center">
-			<div
-				class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-2 py-2 pl-14 pr-8 text-xl"
-				(click)="acao !== null ? acao = null : sairAcoes('sair', null, null)">
+			<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-2 py-2 pl-14 pr-8 text-xl" (click)="acao !== null ? acao = null : sairAcoes('sair', 0, false)">
 				<ion-ripple-effect></ion-ripple-effect>
 				<ion-icon class="absolute left-3 bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
 				<span class="z-10 bg-transparent">VOLTAR</span>
