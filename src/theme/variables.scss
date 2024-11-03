@@ -75,7 +75,8 @@ ion-alert {
 		@apply bg-white;
 	}
 
-	div {
+	div,
+	span {
 		@apply text-white;
 	}
 
@@ -91,7 +92,8 @@ ion-alert {
 		@apply bg-amber-400;
 	}
 
-	div {
+	div,
+	span {
 		@apply text-amber-400;
 	}
 
@@ -103,7 +105,8 @@ ion-alert {
 .player-morto {
 	@apply border-red-700;
 
-	div {
+	div,
+	span {
 		@apply text-red-700;
 	}
 

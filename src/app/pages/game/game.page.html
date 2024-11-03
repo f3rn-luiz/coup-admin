@@ -25,7 +25,7 @@
 							<div class="z-10 font-bold text-black transition-all duration-300">{{ jogador.vida > 0 ? jogador.vida : '' }}</div>
 							<ion-icon class="absolute size-10 transition-all duration-300" [name]="jogador.vida > 0 ? 'heart' : 'heart-dislike'"></ion-icon>
 						</div>
-						<div class="w-12 text-lg font-bold transition-all duration-300">${{ jogador.dinheiro }}</div>
+						<div class="flex w-12 items-center text-lg font-bold transition-all duration-300"><span class="w-7 text-center text-2xl">$</span> {{ jogador.dinheiro }}</div>
 					</div>
 				</div>
 			</ng-container>
