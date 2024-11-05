@@ -16,6 +16,7 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 -   **Contagem Turno / Rodada:** refatoração na contagem de Turno / Rodada que não contava corretamente ao decorrer da partida quando jogadores morriam.
 -   **Card dos Jogadores:** refatoração completa do visual dos cards dos jogadores, seus comportamentos e animações.
+-   **Ação do Jogador:** refatoração do sistema de ação do jogador, identificação do jogador atual na tela de ação, novas opções mais complexas (ação 'Afetar' acontece em cadeia, com várias movimentações simultâneas) e melhor retorno de mensagens para o histórico.
 
 ### Fix
 
