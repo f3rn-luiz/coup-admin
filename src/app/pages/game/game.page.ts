@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController, IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar, ModalController } from '@ionic/angular/standalone';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
-import { Jogador } from 'src/app/core/game.type';
+import { Afetar, Jogador } from 'src/app/core/game.type';
 import { GameActionsPage } from './actions/game-actions.page';
 import { GameHistoryPage } from './history/game-history.page';
 
@@ -63,14 +63,16 @@ export class GamePage implements OnDestroy {
 		modal.present();
 	}
 
-	async mostrarAcoes(jogador: number | null) {
+	async mostrarAcoes() {
+		this._gameService._vez.next(this.vez);
 		const modal = await this._modalController.create({
 			component: GameActionsPage,
 		});
 		modal.present();
 		const { data } = await modal.onWillDismiss();
 		if (data.tipo !== 'sair') {
-			this.registrarAcao(data.tipo, data.valor, data.ganhou, jogador);
+			if (data.afetar) this.registrarAcao(data.tipo, data.valor, data.ganhou, data.afetar);
+			else this.registrarAcao(data.tipo, data.valor, data.ganhou);
 			this.verificarVivos();
 		}
 	}
@@ -143,9 +145,9 @@ export class GamePage implements OnDestroy {
 		}
 	}
 
-	registrarAcao(acao: string, qtd: number, ganhou: boolean, click: number | null) {
-		this._gameService.registrarAcao(acao, qtd, ganhou, click ?? this.vez);
-		if (click === null) this.registrarTurno();
+	registrarAcao(acao: string, qtd: number, ganhou: boolean, afetar?: Afetar) {
+		this._gameService.registrarAcao(acao, qtd, ganhou, afetar);
+		this.registrarTurno();
 	}
 
 	resetarPartida() {

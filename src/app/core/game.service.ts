@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Jogador } from './game.type';
+import { Afetar, Jogador } from './game.type';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
@@ -17,31 +17,40 @@ export class GameService {
 	_jogadores: BehaviorSubject<Jogador[] | null> = new BehaviorSubject<Jogador[] | null>([]);
 
 	// EM JOGO
+	_vez: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 	_turno: BehaviorSubject<number> = new BehaviorSubject(0);
 	_rodada: BehaviorSubject<number> = new BehaviorSubject(1);
 	_historico_geral: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
 	constructor() {}
 
-	registrarAcao(tipo: string, qtd: number, ganhou: boolean, jogador: number) {
-		// tipo = vida / turno / dinheiro
-		let mensagem = '';
-		let jogs = this._jogadores.getValue();
-		if (jogs && tipo === 'vida') mensagem = `${jogs[jogador].nome} perdeu ${qtd} vida${qtd > 1 ? 's' : ''}`;
-		else if (jogs && tipo === 'turno') mensagem = `${jogs[jogador].nome} usou uma carta`;
-		else if (jogs && tipo === 'dinheiro') mensagem = `${jogs[jogador].nome} ${ganhou ? 'recebeu' : 'perdeu'} $${qtd}`;
-		this._historico_geral.next([mensagem, ...this._historico_geral.getValue()]);
+	registrarAcao(tipo: string, qtd: number, ganhou: boolean, afetar?: Afetar) {
+		// tipo = vida / dinheiro / seguir || roubar / assassinar / golpe
+		let vez = this._vez.getValue();
+		let jogadores = this._jogadores.getValue();
 
-		// AÇÕES
-		if (jogs && tipo === 'vida') {
-			jogs[jogador].vida = jogs[jogador].vida - qtd;
-		} else if (jogs && tipo === 'dinheiro') {
-			if (ganhou) jogs[jogador].dinheiro = jogs[jogador].dinheiro + qtd;
-			else if (jogs[jogador].dinheiro - qtd <= 0) jogs[jogador].dinheiro = 0;
-			else jogs[jogador].dinheiro = jogs[jogador].dinheiro - qtd;
+		if (vez !== null && jogadores) {
+			let mensagem = '';
+
+			if (tipo === 'seguir') mensagem = `${jogadores[vez].nome} usou uma carta`;
+			else if (tipo === 'vida') {
+				jogadores[vez].vida = jogadores[vez].vida - qtd;
+				mensagem = `${jogadores[vez].nome} perdeu ${qtd} vida${qtd > 1 ? 's' : ''}`;
+			} else if (tipo === 'dinheiro') {
+				if (ganhou) jogadores[vez].dinheiro = jogadores[vez].dinheiro + qtd;
+				else jogadores[vez].dinheiro = jogadores[vez].dinheiro - qtd <= 0 ? 0 : jogadores[vez].dinheiro - qtd;
+				mensagem = `${jogadores[vez].nome} ${ganhou ? 'recebeu' : 'perdeu'} $${qtd}`;
+			} else if (tipo === 'afetar' && afetar && afetar.alvo !== null) {
+				if (afetar.tipo === 'golpe') {
+					jogadores[vez].dinheiro -= this._custo_golpe_estado.value;
+					jogadores[afetar.alvo].vida -= qtd;
+					mensagem = `${jogadores[vez].nome} deu um Golpe de Estado em ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: -$${this._custo_golpe_estado.value} | ${jogadores[afetar.alvo].nome}: -${qtd}♥)`;
+				}
+			}
+			this._historico_geral.next([mensagem, ...this._historico_geral.getValue()]);
 		}
 
-		this._jogadores.next(jogs);
+		this._jogadores.next(jogadores);
 	}
 
 	registrarTurno(ant: number, pro: number) {
