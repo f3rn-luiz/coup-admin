@@ -8,16 +8,16 @@
 	<div class="flex h-full w-full flex-col items-center justify-center">
 		<div class="flex w-full flex-col items-center justify-center py-2">
 			<ng-container *ngIf="acao === null">
-				<div class="relative mb-4 flex w-48 items-center justify-center border-t border-zinc-400"><p class="absolute bg-black p-1 text-zinc-400">si mesmo</p></div>
+				<div class="relative mb-4 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">si mesmo</p></div>
 				<div class="mx-auto mb-4 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('vida', 1, false)">
 					<ion-icon class="mr-4 size-7" name="heart-dislike"></ion-icon> -1 Vida
 				</div>
 				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 0"><span class="mr-4 size-7 text-center text-2xl font-bold">$</span> Dinheiro</div>
 
-				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center border-t border-zinc-400"><p class="absolute bg-black p-1 text-zinc-400">outro jogador</p></div>
+				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">outro jogador</p></div>
 				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('turno', 0, false)"><ion-icon class="mr-4 size-7" name="flame"></ion-icon> Afetar</div>
 
-				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center border-t border-zinc-400"><p class="absolute bg-black p-1 text-zinc-400">sem impacto</p></div>
+				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">sem impacto</p></div>
 				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('turno', 0, false)">
 					<ion-icon class="mr-4 size-7" name="play-forward"></ion-icon> Seguir
 				</div>
