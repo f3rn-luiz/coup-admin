@@ -5,11 +5,14 @@ export interface Jogador {
 }
 
 export interface Afetar {
-	tipo: string | null;
+	tipo: null | string;
+	reacao: null | ReacaoAfetar;
 	alvo: null | number;
 	vida: null | boolean;
 	qtd: null | number;
 }
+
+export type ReacaoAfetar = 'bloqueado' | 'bloqueio falho' | 'bloqueio provado' | 'duvida falha' | 'duvida provada' | 'ok';
 
 export interface VoltarJogada {
 	jogadores: Jogador[] | null;

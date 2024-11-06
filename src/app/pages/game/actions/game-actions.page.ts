@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar, ModalController } from '@ionic/angular/standalone';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
-import { Afetar, Jogador } from 'src/app/core/game.type';
+import { Afetar, Jogador, ReacaoAfetar } from 'src/app/core/game.type';
 
 @Component({
 	selector: 'app-game-history',
@@ -20,7 +20,7 @@ export class GameActionsPage implements OnDestroy {
 	custo_golpe_estado: number = 0;
 
 	acao: number | null = null;
-	isAfetar: Afetar = { tipo: null, alvo: null, vida: null, qtd: null };
+	isAfetar: Afetar = { tipo: null, reacao: null, alvo: null, vida: null, qtd: null };
 
 	constructor(
 		private _gameService: GameService,
@@ -32,7 +32,7 @@ export class GameActionsPage implements OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.isAfetar = { tipo: null, alvo: null, vida: null, qtd: null };
+		this.isAfetar = { tipo: null, reacao: null, alvo: null, vida: null, qtd: null };
 		this._unsubscribeAll.next(null);
 		this._unsubscribeAll.complete();
 	}
@@ -41,10 +41,20 @@ export class GameActionsPage implements OnDestroy {
 		this._modalController.dismiss({ tipo, valor, ganhou, afetar });
 	}
 
+	confirmarAfetar(tipo: 'roubar' | 'assassinar' | 'golpe' | 'outro', vida: boolean, qtd: number) {
+		this.isAfetar = { tipo: tipo, reacao: null, alvo: null, vida: vida, qtd: qtd };
+		this.acao = 2;
+	}
+
 	confirmarJogador(jogador: number) {
 		this.isAfetar.alvo = jogador;
 
 		if (this.isAfetar.tipo === 'golpe') this.sairAcoes('afetar', 1, false, this.isAfetar);
-		else if (this.isAfetar.tipo === 'roubar' || this.isAfetar.tipo === 'assassinar') this.acao = 3;
+		else this.acao = 3;
+	}
+
+	confirmarReacao(reacao: ReacaoAfetar) {
+		if (reacao !== 'ok') this.isAfetar.reacao = reacao;
+		this.sairAcoes('afetar', this.isAfetar.tipo === 'roubar' ? 2 : 1, this.isAfetar.tipo === 'roubar' ? true : false, this.isAfetar);
 	}
 }
