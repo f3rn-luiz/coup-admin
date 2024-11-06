@@ -10,3 +10,11 @@ export interface Afetar {
 	vida: null | boolean;
 	qtd: null | number;
 }
+
+export interface VoltarJogada {
+	jogadores: Jogador[] | null;
+	historico: string[];
+	vez: number;
+	turno: number;
+	rodada: number;
+}

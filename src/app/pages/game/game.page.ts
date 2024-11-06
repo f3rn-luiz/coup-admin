@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController, IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar, ModalController } from '@ionic/angular/standalone';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
-import { Afetar, Jogador } from 'src/app/core/game.type';
+import { Afetar, Jogador, VoltarJogada } from 'src/app/core/game.type';
 import { GameActionsPage } from './actions/game-actions.page';
 import { GameHistoryPage } from './history/game-history.page';
 
@@ -26,6 +26,9 @@ export class GamePage implements OnDestroy {
 	rodada: number = 0;
 	fim_jogo: boolean = false;
 	historico: string[] = [];
+
+	pre_voltar_jogada: null | VoltarJogada = null;
+	voltar_jogada: null | VoltarJogada = null;
 
 	custo_golpe_estado: number = 0;
 	golpe_estado_obrigatorio: number = 0;
@@ -64,6 +67,7 @@ export class GamePage implements OnDestroy {
 	}
 
 	async mostrarAcoes() {
+		if (!this.pre_voltar_jogada || this.pre_voltar_jogada.turno !== this.turno) this.pre_voltar_jogada = { jogadores: JSON.parse(JSON.stringify(this.jogadores)), historico: this.historico, vez: this.vez, turno: this.turno, rodada: this.rodada };
 		this._gameService._vez.next(this.vez);
 		const modal = await this._modalController.create({
 			component: GameActionsPage,
@@ -71,6 +75,7 @@ export class GamePage implements OnDestroy {
 		modal.present();
 		const { data } = await modal.onWillDismiss();
 		if (data.tipo !== 'sair') {
+			this.voltar_jogada = this.pre_voltar_jogada;
 			if (data.afetar) this.registrarAcao(data.tipo, data.valor, data.ganhou, data.afetar);
 			else this.registrarAcao(data.tipo, data.valor, data.ganhou);
 			this.verificarVivos();
@@ -125,6 +130,30 @@ export class GamePage implements OnDestroy {
 		if (this._gameService.contarVivos() === 1) {
 			this.fim_jogo = true;
 			this.mostrarGanhador();
+		}
+	}
+
+	async voltarJogada() {
+		const alert = await this._alertController.create({
+			header: 'Tem certeza que deseja voltar a jogada?',
+			subHeader: 'Esse recurso só pode ser usado uma vez por ação e não será possível voltar atrás',
+			buttons: [
+				{ text: 'OK', role: 'ok' },
+				{ text: 'Cancelar', role: 'cancel' },
+			],
+		});
+		alert.present();
+		const option = await alert.onWillDismiss();
+
+		if (option.role == 'ok' && this.voltar_jogada) {
+			this._gameService._jogadores.next(this.voltar_jogada.jogadores);
+			this._gameService._historico_geral.next(this.voltar_jogada.historico);
+			this._gameService._turno.next(this.voltar_jogada.turno);
+			this._gameService._rodada.next(this.voltar_jogada.rodada);
+			this.vez = this.voltar_jogada.vez;
+
+			this.pre_voltar_jogada = null;
+			this.voltar_jogada = null;
 		}
 	}
 
