@@ -135,6 +135,7 @@ export class GamePage implements OnDestroy {
 
 	async voltarJogada() {
 		const alert = await this._alertController.create({
+			mode: 'ios',
 			header: 'Tem certeza que deseja voltar a jogada?',
 			subHeader: 'Esse recurso só pode ser usado uma vez por ação e não será possível voltar atrás',
 			buttons: [
