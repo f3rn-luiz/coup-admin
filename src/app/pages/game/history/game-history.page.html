@@ -6,13 +6,13 @@
 
 <ion-content>
 	<div class="flex h-full w-full flex-col items-center">
-		<div class="flex w-full flex-col items-center justify-center py-2">
+		<div class="flex w-full flex-col items-center justify-center pr-4 pt-2">
 			<ng-container *ngIf="historico && historico.length > 0; else semHistorico">
 				<ng-container *ngFor="let hist of historico; index as idx">
-					<div class="mb-1 flex w-full items-center">
+					<div class="mb-2 flex w-full items-center">
 						<p class="w-12 text-nowrap text-right">{{ historico.length - idx }}</p>
 						<ion-icon class="w-10" name="arrow-forward"></ion-icon>
-						<p class="flex-1 whitespace-pre-line">{{ hist }}</p>
+						<p class="flex-1 whitespace-pre-line rounded-l-lg border-l pl-2">{{ hist }}</p>
 					</div>
 				</ng-container>
 			</ng-container>
