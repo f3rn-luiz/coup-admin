@@ -184,5 +184,7 @@ export class GamePage implements OnDestroy {
 		this._gameService.resetarPartida();
 		this.fim_jogo = false;
 		this.vez = 0;
+		this.pre_voltar_jogada = null;
+		this.voltar_jogada = null;
 	}
 }
