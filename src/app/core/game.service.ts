@@ -40,21 +40,21 @@ export class GameService {
 				this.carmaAcao({ id: vez, vida: 0, dinheiro: ganhou ? qtd : -qtd }, null);
 			} else if (tipo === 'afetar' && afetar && afetar.alvo !== null) {
 				if (afetar.tipo === 'golpe') {
-					mensagem = `${jogadores[vez].nome} deu um Golpe de Estado em ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: -$${this._custo_golpe_estado.value} | ${jogadores[afetar.alvo].nome}: -${qtd}♥)`;
+					mensagem = `${jogadores[vez].nome} deu um Golpe de Estado em ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: -$${this._custo_golpe_estado.value} | ${jogadores[afetar.alvo].nome}: -${qtd}♡)`;
 					this.carmaAcao({ id: vez, vida: 0, dinheiro: this._custo_golpe_estado.value }, { id: afetar.alvo, vida: qtd, dinheiro: 0 });
 				} else if (afetar.tipo === 'roubar') {
 					if (afetar.reacao === 'bloqueado') mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} mas foi Bloqueado\n(ninguém foi afetado)`;
 					else if (afetar.reacao === 'bloqueio falho') {
-						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome} depois de um Bloqueio Falho\n(${jogadores[afetar.alvo].nome}: -1♥ -$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro} | ${jogadores[vez].nome}: +$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro})`;
+						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome} depois de um Bloqueio Falho\n(${jogadores[afetar.alvo].nome}: -1♡ -$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro} | ${jogadores[vez].nome}: +$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro})`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro }, { id: afetar.alvo, vida: 1, dinheiro: qtd });
 					} else if (afetar.reacao === 'bloqueio provado') {
-						mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} que Provou seu Bloqueio\n(${jogadores[vez].nome}: -1♥)`;
+						mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} que Provou seu Bloqueio\n(${jogadores[vez].nome}: -1♡)`;
 						this.carmaAcao({ id: vez, vida: 1, dinheiro: 0 }, null);
 					} else if (afetar.reacao === 'duvida falha') {
-						mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} mas Falhou na Dúvida\n(${jogadores[vez].nome}: -1♥)`;
+						mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} mas Falhou na Dúvida\n(${jogadores[vez].nome}: -1♡)`;
 						this.carmaAcao({ id: vez, vida: 1, dinheiro: 0 }, null);
 					} else if (afetar.reacao === 'duvida provada') {
-						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome} depois de uma Dúvida Provada\n(${jogadores[afetar.alvo].nome}: -1♥ -$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro} | ${jogadores[vez].nome}: +$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro})`;
+						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome} depois de uma Dúvida Provada\n(${jogadores[afetar.alvo].nome}: -1♡ -$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro} | ${jogadores[vez].nome}: +$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro})`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro }, { id: afetar.alvo, vida: 1, dinheiro: qtd });
 					} else {
 						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome}\n(${jogadores[afetar.alvo].nome}: -$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro} | ${jogadores[vez].nome}: +$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro})`;
@@ -65,27 +65,27 @@ export class GameService {
 						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} mas foi Bloqueado\n(${jogadores[vez].nome}: -$3)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: -3 }, null);
 					} else if (afetar.reacao === 'bloqueio falho') {
-						mensagem = `${jogadores[vez].nome} Assassinou ${jogadores[afetar.alvo].nome} depois de um Bloqueio Falho\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -2♥)`;
+						mensagem = `${jogadores[vez].nome} Assassinou ${jogadores[afetar.alvo].nome} depois de um Bloqueio Falho\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -2♡)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: -3 }, { id: afetar.alvo, vida: 2, dinheiro: 0 });
 					} else if (afetar.reacao === 'bloqueio provado') {
-						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} que Provou seu Bloqueio\n(${jogadores[vez].nome}: -1♥ -$3)`;
+						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} que Provou seu Bloqueio\n(${jogadores[vez].nome}: -1♡ -$3)`;
 						this.carmaAcao({ id: vez, vida: 1, dinheiro: -3 }, null);
 					} else if (afetar.reacao === 'duvida falha') {
-						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} mas Falhou na Dúvida\n(${jogadores[vez].nome}: -1♥ -$3)`;
+						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} mas Falhou na Dúvida\n(${jogadores[vez].nome}: -1♡ -$3)`;
 						this.carmaAcao({ id: vez, vida: 1, dinheiro: -3 }, null);
 					} else if (afetar.reacao === 'duvida provada') {
-						mensagem = `${jogadores[vez].nome} Assassinou ${jogadores[afetar.alvo].nome} depois de uma Dúvida Provada\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -2♥)`;
+						mensagem = `${jogadores[vez].nome} Assassinou ${jogadores[afetar.alvo].nome} depois de uma Dúvida Provada\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -2♡)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: -3 }, { id: afetar.alvo, vida: 2, dinheiro: 0 });
 					} else {
-						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -1♥)`;
+						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -1♡)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: -3 }, { id: afetar.alvo, vida: 1, dinheiro: 0 });
 					}
 				} else if (afetar.tipo === 'outro') {
 					if (afetar.reacao === 'duvida falha') {
-						mensagem = `${jogadores[vez].nome} tentou usar um Efeito em ${jogadores[afetar.alvo].nome} mas Falhou na Dúvida\n(${jogadores[vez].nome}: -1♥)`;
+						mensagem = `${jogadores[vez].nome} tentou usar um Efeito em ${jogadores[afetar.alvo].nome} mas Falhou na Dúvida\n(${jogadores[vez].nome}: -1♡)`;
 						this.carmaAcao({ id: vez, vida: 1, dinheiro: 0 }, null);
 					} else if (afetar.reacao === 'duvida provada') {
-						mensagem = `${jogadores[vez].nome} usou um Efeito em ${jogadores[afetar.alvo].nome} depois de uma Dúvida Provada\n(${jogadores[afetar.alvo].nome}: -1♥)`;
+						mensagem = `${jogadores[vez].nome} usou um Efeito em ${jogadores[afetar.alvo].nome} depois de uma Dúvida Provada\n(${jogadores[afetar.alvo].nome}: -1♡)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: 0 }, { id: afetar.alvo, vida: 1, dinheiro: 0 });
 					} else mensagem = `${jogadores[vez].nome} usou um Efeito em ${jogadores[afetar.alvo].nome}`;
 				}
