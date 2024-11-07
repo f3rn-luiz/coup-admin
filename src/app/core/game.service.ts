@@ -41,7 +41,7 @@ export class GameService {
 			} else if (tipo === 'afetar' && afetar && afetar.alvo !== null) {
 				if (afetar.tipo === 'golpe') {
 					mensagem = `${jogadores[vez].nome} deu um Golpe de Estado em ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: -$${this._custo_golpe_estado.value} | ${jogadores[afetar.alvo].nome}: -${qtd}♡)`;
-					this.carmaAcao({ id: vez, vida: 0, dinheiro: this._custo_golpe_estado.value }, { id: afetar.alvo, vida: qtd, dinheiro: 0 });
+					this.carmaAcao({ id: vez, vida: 0, dinheiro: -this._custo_golpe_estado.value }, { id: afetar.alvo, vida: qtd, dinheiro: 0 });
 				} else if (afetar.tipo === 'roubar') {
 					if (afetar.reacao === 'bloqueado') mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} mas foi Bloqueado\n(ninguém foi afetado)`;
 					else if (afetar.reacao === 'bloqueio falho') {
