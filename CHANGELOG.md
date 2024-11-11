@@ -4,7 +4,7 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 ---
 
-## 1.4.0 (??-11-2024)
+## 1.4.0 (07-11-2024)
 
 ### Feature
 
