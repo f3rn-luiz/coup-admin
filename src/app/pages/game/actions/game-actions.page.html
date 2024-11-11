@@ -29,13 +29,13 @@
 
 			<!-- Ação: Dinheiro -->
 			<ng-container *ngIf="acao === 0">
-				<div class="relative mb-4 mt-2 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">receber</p></div>
-				<div class="mx-auto mb-4 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 1, true)">
-					<span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +1
-				</div>
-				<div class="mx-auto mb-4 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 2, true)">
-					<span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +2
-				</div>
+				<div class="relative mb-4 mt-2 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">padrão</p></div>
+				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 1, true)"><span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +1</div>
+
+				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">ajuda (bloqueável)</p></div>
+				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 2, true)"><span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +2</div>
+
+				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">efeito (duvidável)</p></div>
 				<div class="mx-auto mb-2 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 3, true)">
 					<span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +3
 				</div>
