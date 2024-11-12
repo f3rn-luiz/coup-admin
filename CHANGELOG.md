@@ -4,6 +4,15 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 ---
 
+## 1.4.1 (??-11-2024)
+
+### Fix
+
+-   **Ações não Previstas:** implementação/correção de algumas ações não previstas (Ajuda Externa & Taxa), correção de funcionalidade para o bom funcionamento da aplicação.
+-   **Estilo dos Subtitulos:** padronização no estilo dos subtitulos, remoção de código desnecessário.
+
+<br>
+
 ## 1.4.0 (07-11-2024)
 
 ### Feature
