@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonToolbar, ModalController } from '@ionic/angular/standalone';
 import { Subject, takeUntil } from 'rxjs';
 import { GameService } from 'src/app/core/game.service';
-import { Afetar, Jogador, ReacaoAfetar } from 'src/app/core/game.type';
+import { Afetar, Jogador, ReacaoAfetar, TipoAfetar } from 'src/app/core/game.type';
 
 @Component({
 	selector: 'app-game-history',
@@ -41,20 +41,34 @@ export class GameActionsPage implements OnDestroy {
 		this._modalController.dismiss({ tipo, valor, ganhou, afetar });
 	}
 
-	confirmarAfetar(tipo: 'roubar' | 'assassinar' | 'golpe' | 'outro', vida: boolean, qtd: number) {
+	confirmarAfetar(tipo: TipoAfetar, vida: boolean, qtd: number) {
 		this.isAfetar = { tipo: tipo, reacao: null, alvo: null, vida: vida, qtd: qtd };
-		this.acao = 2;
+		if (tipo === 'ajuda' || tipo === 'taxar') this.acao = 3;
+		else this.acao = 2;
 	}
 
 	confirmarJogador(jogador: number) {
 		this.isAfetar.alvo = jogador;
-
-		if (this.isAfetar.tipo === 'golpe') this.sairAcoes('afetar', 1, false, this.isAfetar);
+		if (this.isAfetar.tipo === 'golpe' || this.isAfetar.tipo === 'ajuda' || this.isAfetar.tipo === 'taxar') this.sairAcoes('afetar', this.isAfetar.qtd ?? 1, false, this.isAfetar);
 		else this.acao = 3;
 	}
 
 	confirmarReacao(reacao: ReacaoAfetar) {
 		if (reacao !== 'ok') this.isAfetar.reacao = reacao;
-		this.sairAcoes('afetar', this.isAfetar.tipo === 'roubar' ? 2 : 1, this.isAfetar.tipo === 'roubar' ? true : false, this.isAfetar);
+		if (reacao !== 'ok' && (this.isAfetar.tipo === 'ajuda' || this.isAfetar.tipo === 'taxar')) this.acao = 2;
+		else {
+			if (this.isAfetar.tipo === 'ajuda' || this.isAfetar.tipo === 'taxar') this.isAfetar.alvo = 0;
+			this.sairAcoes('afetar', this.isAfetar.tipo === 'roubar' || this.isAfetar.tipo === 'ajuda' ? 2 : this.isAfetar.tipo === 'taxar' ? 3 : 1, this.isAfetar.tipo === 'roubar' ? true : false, this.isAfetar);
+		}
+	}
+
+	voltar() {
+		if (this.acao !== null) {
+			if (this.acao <= 1) this.acao = null;
+			else if (this.isAfetar.tipo === 'ajuda' || this.isAfetar.tipo === 'taxar') {
+				if (this.acao === 2) this.acao = 3;
+				else if (this.acao === 3) this.acao = 0;
+			} else this.acao = this.acao - 1;
+		} else this.sairAcoes('sair', 0, false);
 	}
 }

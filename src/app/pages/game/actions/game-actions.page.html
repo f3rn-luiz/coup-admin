@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar>
 		<div class="mb-2 mt-4 flex w-full flex-col items-center justify-center">
-			<div class="w-full text-center text-3xl font-light">Ação<span *ngIf="acao !== null">{{ acao === 0 ? ': Dinheiro' : ': Afetar' }}</span></div>
+			<div class="w-full text-center text-3xl font-light">Ação<span *ngIf="acao !== null">{{ acao === 0 ? ': Dinheiro' : ': Efeito' }}</span></div>
 			<div *ngIf="jogadores && vez !== null" class="w-full text-center font-light text-zinc-400">De: {{ jogadores[vez].nome }}</div>
 		</div>
 	</ion-toolbar>
@@ -12,16 +12,16 @@
 		<div *ngIf="vez !== null" class="flex w-full flex-col items-center overflow-y-auto py-2">
 			<!-- Ações Base -->
 			<ng-container *ngIf="acao === null">
-				<div class="relative mb-4 mt-2 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">si próprio</p></div>
+				<div class="mb-2 flex items-center justify-center text-zinc-400">si próprio</div>
 				<div class="mx-auto mb-4 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('vida', 1, false)">
 					<ion-icon class="mr-4 size-7" name="heart-dislike"></ion-icon> -1 Vida
 				</div>
 				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 0"><span class="mr-4 w-7 text-center text-2xl font-bold">$</span> Dinheiro</div>
 
-				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">outro jogador</p></div>
+				<div class="mb-2 mt-10 flex items-center justify-center text-zinc-400">outro jogador</div>
 				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="acao = 1"><ion-icon class="mr-4 size-7" name="flame"></ion-icon> Afetar</div>
 
-				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">sem impacto</p></div>
+				<div class="mb-2 mt-10 flex items-center justify-center text-zinc-400">sem impacto</div>
 				<div class="mx-auto mb-2 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('seguir', 0, false)">
 					<ion-icon class="mr-4 size-7" name="play-forward"></ion-icon> Seguir
 				</div>
@@ -29,14 +29,16 @@
 
 			<!-- Ação: Dinheiro -->
 			<ng-container *ngIf="acao === 0">
-				<div class="relative mb-4 mt-2 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">padrão</p></div>
+				<div class="mb-2 flex items-center justify-center text-zinc-400">padrão</div>
 				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 1, true)"><span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +1</div>
 
-				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">ajuda (bloqueável)</p></div>
-				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 2, true)"><span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +2</div>
+				<div class="mb-2 mt-10 flex items-center justify-center text-zinc-400">ajuda externa (bloqueável)</div>
+				<div class="mx-auto flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarAfetar('ajuda', false, 2)">
+					<span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +2
+				</div>
 
-				<div class="relative mb-4 mt-10 flex w-48 items-center justify-center"><p class="absolute bg-black p-1 text-zinc-400">efeito (duvidável)</p></div>
-				<div class="mx-auto mb-2 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="sairAcoes('dinheiro', 3, true)">
+				<div class="mb-2 mt-10 flex items-center justify-center text-zinc-400">taxa (duvidável)</div>
+				<div class="mx-auto mb-2 flex h-12 w-52 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarAfetar('taxar', false, 3)">
 					<span class="mr-2 w-7 text-center text-2xl font-bold">$</span> +3
 				</div>
 			</ng-container>
@@ -83,7 +85,7 @@
 
 			<!-- Ação: Afetar > Deu certo? -->
 			<ng-container *ngIf="acao === 3">
-				<ng-container *ngIf="isAfetar.tipo !== 'outro'">
+				<ng-container *ngIf="isAfetar.tipo !== 'outro' && isAfetar.tipo !== 'taxar'">
 					<div class="mb-2 flex items-center justify-center text-zinc-400">aceita o bloqueio (nenhum efeito acontece)</div>
 					<div class="mx-auto flex h-12 w-64 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarReacao('bloqueado')">
 						<ion-icon class="mr-4 size-7" name="shield"></ion-icon>Ação Bloqueada
@@ -98,13 +100,15 @@
 					</div>
 				</ng-container>
 
-				<div class="mb-2 {{ isAfetar.tipo !== 'outro' ? 'mt-10' : '' }} flex items-center justify-center text-zinc-400">alvo duvida da sua carta</div>
-				<div class="mx-auto mb-4 flex h-12 w-64 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarReacao('duvida falha')">
-					<ion-icon class="mr-4 size-7" name="help"></ion-icon>Dúvida Falha
-				</div>
-				<div class="mx-auto flex h-12 w-64 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarReacao('duvida provada')">
-					<ion-icon class="mr-4 size-7" name="alert"></ion-icon>Dúvida Provada
-				</div>
+				<ng-container *ngIf="isAfetar.tipo !== 'ajuda'">
+					<div class="mb-2 {{ isAfetar.tipo !== 'outro' ? 'mt-10' : '' }} flex items-center justify-center text-zinc-400">alvo duvida da sua carta</div>
+					<div class="mx-auto mb-4 flex h-12 w-64 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarReacao('duvida falha')">
+						<ion-icon class="mr-4 size-7" name="close-outline"></ion-icon>Caiu na Dúvida
+					</div>
+					<div class="mx-auto flex h-12 w-64 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarReacao('duvida provada')">
+						<ion-icon class="mr-4 size-7" name="checkmark-outline"></ion-icon>Dúvida Provada
+					</div>
+				</ng-container>
 
 				<div class="mb-2 mt-10 flex items-center justify-center text-zinc-400">o efeito é causado sem reação</div>
 				<div class="mx-auto flex h-12 w-64 items-center justify-center rounded-full border-2 border-white py-2 pl-5 pr-7 text-xl" (click)="confirmarReacao('ok')"><ion-icon class="mr-4 size-7" name="checkmark-done"></ion-icon>Feito</div>
@@ -116,9 +120,7 @@
 <ion-footer>
 	<ion-toolbar>
 		<div class="mb-4 mt-2 flex w-full flex-col items-center justify-center">
-			<div
-				class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-2 py-2 pl-14 pr-8 text-xl"
-				(click)="acao !== null ? acao <= 1 ?  acao = null : acao = acao - 1 : sairAcoes('sair', 0, false)">
+			<div class="ion-activatable ripple-parent rounded-rectangle relative flex h-12 items-center justify-center overflow-hidden rounded-full border-2 py-2 pl-14 pr-8 text-xl" (click)="voltar()">
 				<ion-ripple-effect></ion-ripple-effect>
 				<ion-icon class="absolute left-3 bg-transparent text-3xl" name="chevron-back-outline"></ion-icon>
 				<span class="z-10 bg-transparent">VOLTAR</span>

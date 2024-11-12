@@ -12,6 +12,8 @@ export interface Afetar {
 	qtd: null | number;
 }
 
+export type TipoAfetar = 'ajuda' | 'assassinar' | 'golpe' | 'outro' | 'roubar' | 'taxar';
+
 export type ReacaoAfetar = 'bloqueado' | 'bloqueio falho' | 'bloqueio provado' | 'duvida falha' | 'duvida provada' | 'ok';
 
 export interface VoltarJogada {
