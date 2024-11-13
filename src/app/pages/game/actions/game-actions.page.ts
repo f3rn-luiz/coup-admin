@@ -66,8 +66,10 @@ export class GameActionsPage implements OnDestroy {
 		if (this.acao !== null) {
 			if (this.acao <= 1) this.acao = null;
 			else if (this.isAfetar.tipo === 'ajuda' || this.isAfetar.tipo === 'taxar') {
-				if (this.acao === 2) this.acao = 3;
-				else if (this.acao === 3) this.acao = 0;
+				if (this.acao === 2) {
+					this.isAfetar.reacao = null;
+					this.acao = 3;
+				} else if (this.acao === 3) this.acao = 0;
 			} else this.acao = this.acao - 1;
 		} else this.sairAcoes('sair', 0, false);
 	}
