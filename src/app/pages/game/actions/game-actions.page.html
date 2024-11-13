@@ -1,7 +1,12 @@
 <ion-header>
 	<ion-toolbar>
 		<div class="mb-2 mt-4 flex w-full flex-col items-center justify-center">
-			<div class="w-full text-center text-3xl font-light">Ação<span *ngIf="acao !== null">{{ acao === 0 ? ': Dinheiro' : ': Efeito' }}</span></div>
+			<div class="w-full text-center text-3xl font-light">
+				<span *ngIf="(isAfetar.tipo !== 'ajuda' && isAfetar.tipo !== 'taxar') || (acao !== 2 && (isAfetar.tipo === 'ajuda' || isAfetar.tipo === 'taxar'))">
+					Ação<span *ngIf="acao !== null">{{ acao === 0 ? ': Dinheiro' : ': Efeito' }}</span>
+				</span>
+				<span *ngIf="acao === 2 && (isAfetar.tipo === 'ajuda' || isAfetar.tipo === 'taxar')">Quem fez {{isAfetar.tipo === 'ajuda' ? 'o Bloqueio' : 'a Dúvida'}}?</span>
+			</div>
 			<div *ngIf="jogadores && vez !== null" class="w-full text-center font-light text-zinc-400">De: {{ jogadores[vez].nome }}</div>
 		</div>
 	</ion-toolbar>
