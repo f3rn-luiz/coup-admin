@@ -10,6 +10,8 @@ Todas as atualizações e mudanças notáveis deste projeto serão documentadas 
 
 -   **Ações não Previstas:** implementação/correção de algumas ações não previstas (Ajuda Externa & Taxa), correção de funcionalidade para o bom funcionamento da aplicação.
 -   **Estilo dos Subtitulos:** padronização no estilo dos subtitulos, remoção de código desnecessário.
+-   **Mensagens de Bloqueio:** correção das mensagens de bloqueio, a fim de manter o gênero neutro nas ações.
+-   **Voltar Jogada:** incluido o botão de voltar jogada mesmo depois de finalizar a partida, para corrigir erros de registro de jogada.
 
 <br>
 
