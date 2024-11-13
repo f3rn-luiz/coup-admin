@@ -41,7 +41,7 @@ export class GameService {
 			} else if (tipo === 'afetar' && afetar && afetar.alvo !== null) {
 				// Ação - Ajuda
 				if (afetar.tipo === 'ajuda') {
-					if (afetar.reacao === 'bloqueado') mensagem = `${jogadores[vez].nome} tentou pegar Ajuda Externa mas foi Bloqueado por ${jogadores[afetar.alvo].nome}`;
+					if (afetar.reacao === 'bloqueado') mensagem = `${jogadores[vez].nome} tentou pegar Ajuda Externa mas levou um Bloqueio de ${jogadores[afetar.alvo].nome}`;
 					else if (afetar.reacao === 'bloqueio falho') {
 						mensagem = `${jogadores[vez].nome} pegou Ajuda Externa depois de um Bloqueio Falho de ${jogadores[afetar.alvo].nome}\n(${jogadores[vez].nome}: +$${qtd} | ${jogadores[afetar.alvo].nome}: -1♡)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: qtd }, { id: afetar.alvo, vida: 1, dinheiro: 0 });
@@ -56,7 +56,7 @@ export class GameService {
 				// Ação - Assassinar
 				else if (afetar.tipo === 'assassinar') {
 					if (afetar.reacao === 'bloqueado') {
-						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} mas foi Bloqueado\n(${jogadores[vez].nome}: -$3)`;
+						mensagem = `${jogadores[vez].nome} tentou Assassinar ${jogadores[afetar.alvo].nome} mas levou um Bloqueio\n(${jogadores[vez].nome}: -$3)`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: -3 }, null);
 					} else if (afetar.reacao === 'bloqueio falho') {
 						mensagem = `${jogadores[vez].nome} Assassinou ${jogadores[afetar.alvo].nome} depois de um Bloqueio Falho\n(${jogadores[vez].nome}: -$3 | ${jogadores[afetar.alvo].nome}: -2♡)`;
@@ -92,7 +92,7 @@ export class GameService {
 				}
 				// Ação - Roubar
 				else if (afetar.tipo === 'roubar') {
-					if (afetar.reacao === 'bloqueado') mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} mas foi Bloqueado\n(ninguém foi afetado)`;
+					if (afetar.reacao === 'bloqueado') mensagem = `${jogadores[vez].nome} tentou Roubar ${jogadores[afetar.alvo].nome} mas levou um Bloqueio\n(ninguém foi afetado)`;
 					else if (afetar.reacao === 'bloqueio falho') {
 						mensagem = `${jogadores[vez].nome} Roubou ${jogadores[afetar.alvo].nome} depois de um Bloqueio Falho\n(${jogadores[afetar.alvo].nome}: -1♡ -$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro} | ${jogadores[vez].nome}: +$${jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro})`;
 						this.carmaAcao({ id: vez, vida: 0, dinheiro: jogadores[afetar.alvo].dinheiro >= qtd ? qtd : jogadores[afetar.alvo].dinheiro }, { id: afetar.alvo, vida: 1, dinheiro: qtd });
