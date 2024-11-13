@@ -155,6 +155,7 @@ export class GamePage implements OnDestroy {
 
 			this.pre_voltar_jogada = null;
 			this.voltar_jogada = null;
+			this.fim_jogo = false;
 		}
 	}
 
